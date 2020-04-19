@@ -17,4 +17,11 @@ Route::get('/', function () {
 
 Auth::routes();
 
+
 Route::get('/home', 'HomeController@index')->name('home');
+
+//Rutas protegidas
+Route::group(['middleware' => ['auth']], function () {
+    Route::resource('/notas', 'NotaController');
+
+});
