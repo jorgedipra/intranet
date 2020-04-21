@@ -22,11 +22,11 @@
           <ul class="navbar-nav mr-auto mt-2 mt-lg-0 d-block d-sm-block d-md-none text-center">
               <li class="nav-item active">
                   <a class="nav-link" href="{{ url('/intranet') }}">
-                      Home <span class="sr-only">(current)</span>
+                    Intranet <span class="sr-only">(current)</span>
                   </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
+                <a class="nav-link" href="{{ url('/web') }}">home</a>
               </li>
               <li class="nav-item">
                   <a class="nav-link" href="{{ route('logout') }}"

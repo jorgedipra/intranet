@@ -41,9 +41,6 @@
         }
     }
 </script>
-<style >
-
-</style>
 <style lang="stylus">
 .imgHome{
     width: 100%;

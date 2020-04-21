@@ -23,5 +23,6 @@ Route::get('/home', 'HomeController@index')->name('home');
 //Rutas protegidas
 Route::group(['middleware' => ['auth']], function () {
     Route::resource('/intranet', 'NotaController');
+    Route::get('/web', 'webController@index')->name('web');
 
 });

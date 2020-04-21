@@ -1,16 +1,16 @@
 <nav class="main-menu d-none d-sm-none d-md-block">
     <ul>
-        <li id="IntranetLisat">
+        <li @if(\Request::route()->getName()=='intranet.index')  id="IntranetLisat" @else  @if(\Request::route()->getName()=='intranet.index')  id="IntranetLisat" @else class="has-subnav" @endif @endif >
             <a href="{{ url('/intranet') }}">
                 <i class="fa fa-list fa-2x"></i>
                 <span class="nav-text">
-                    Intranet
+                    Intranet  
                 </span>
             </a>
           
         </li>
-        <li class="has-subnav">
-            <a href="{{ url('/home') }}">
+        <li  @if(\Request::route()->getName()=='web')  id="IntranetLisat" @else class="has-subnav" @endif>
+            <a href="{{ url('/web') }}">
                 <i class="fa fa-home fa-2x"></i>
                 <span class="nav-text">
                     Home
@@ -18,7 +18,7 @@
             </a>
             
         </li>
-        <li class="has-subnav">
+        <li  @if(\Request::route()->getName()=='')  id="IntranetLisat" @else class="has-subnav" @endif>
             <a href="#">
                 <i class="fa fa-laptop fa-2x"></i>
                 <span class="nav-text">
@@ -27,7 +27,7 @@
             </a>
             
         </li>
-        <li class="has-subnav">
+        <li  @if(\Request::route()->getName()=='')  id="IntranetLisat" @else class="has-subnav" @endif>
             <a href="#">
                <i class="fa fa-list fa-2x"></i>
                 <span class="nav-text">
@@ -36,7 +36,7 @@
             </a>
             
         </li>
-        <li class="has-subnav">
+        <li  @if(\Request::route()->getName()=='')  id="IntranetLisat" @else class="has-subnav" @endif>
             <a href="#">
                <i class="fa fa-folder-open fa-2x"></i>
                 <span class="nav-text">

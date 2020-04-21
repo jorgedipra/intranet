@@ -13,6 +13,9 @@ Vue.config.productionTip = false
 
 Vue.component('home-component', require('./components/HomeComponent.vue'));
 Vue.component('tareas-components', require('./components/notas/IndexComponent.vue'));
+Vue.component('cardpresent-components', require('./components/web/CardPresentComponent.vue'));
+Vue.component('cardfrase-components', require('./components/web/CardFraseComponent.vue'));
+Vue.component('cardcarrucel-components', require('./components/web/CardCarrucelComponent.vue'));
 
 const app = new Vue({
     el: '#app'
