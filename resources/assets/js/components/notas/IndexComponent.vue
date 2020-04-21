@@ -1,42 +1,73 @@
 <template>
-  <div>
-    <form @submit.prevent="editarNota(nota)" v-if="modoEditar">
-      <h3>Editar nota</h3>
-      <input type="text" class="form-control mb-2" 
-        placeholder="Nombre de la nota" v-model="nota.nombre">
-      <input type="text" class="form-control mb-2" 
-        placeholder="Descripción de la nota" v-model="nota.descripcion">
-      <button class="btn btn-warning" type="submit">Editar</button>
-      <button class="btn btn-danger" type="submit" 
-        @click="cancelarEdicion">Cancelar</button>
-    </form>
-    <form @submit.prevent="agregar" v-else>
-      <h3>Agregar nota</h3>
-      <input type="text" class="form-control mb-2" 
-        placeholder="Nombre de la nota" v-model="nota.nombre">
-      <input type="text" class="form-control mb-2" 
-        placeholder="Descripción de la nota" v-model="nota.descripcion">
-      <button class="btn btn-primary" type="submit">Agregar</button>
-    </form>
-    <hr>
-    <h3>Lista de notas:</h3>
-    <ul class="list-group">
-         <li class="list-group-item" 
-            v-for="(item, index) in notas" :key="index" >
-          <span class="badge badge-primary float-right">
-            {{item.updated_at}}
-          </span>
-          <p>{{item.nombre}}</p>
-          <p>{{item.descripcion}}</p>
-          <p>
-            <button class="btn btn-warning btn-sm" 
-                @click="editarFormulario(item)">Editar</button>
-            <button class="btn btn-danger btn-sm" 
-                @click="eliminarNota(item, index)">Eliminar</button>
-          </p>
-        </li>
-    </ul>
-  </div>
+<div class="container">
+    <div class="row">
+      <div class="col-12"> &nbsp; </div>
+      <section class="col-12">
+        <div class="row">
+          <div class="col-7">
+              <div class="card">
+                <div class="card-header">
+                   :: NOTAS ::  <font-awesome-icon :icon="['fas', 'clipboard']" />
+                </div>
+                <div class="card-body">
+                    <h3>Lista de notas:</h3>
+                    <ul class="list-group">
+                        <li class="list-group-item borderTopBl" 
+                            v-for="(item, index) in notas" :key="index" >
+                          <span class="badge badge-primary float-right">
+                            {{item.updated_at}}
+                          </span>
+                          <h4>{{item.nombre}}</h4>
+                          <p>{{item.descripcion}}</p>
+                          <hr>  
+                          <p>
+                            <button class="btn btn-warning btn-sm" 
+                                @click="editarFormulario(item)">Editar <font-awesome-icon :icon="['fas', 'edit']" /></button>
+                            <button class="btn btn-danger btn-sm" 
+                                @click="eliminarNota(item, index)">Eliminar <font-awesome-icon :icon="['fas', 'times']" /></button>
+                          </p>
+                        </li>
+                    </ul>
+                </div>
+              </div>
+          </div>
+          <div class="col-4">
+             <div class="card">
+                <div class="card-header">
+                  :: GESTION DE NOTAS ::
+                </div>
+                <div class="card-body">
+                  <form @submit.prevent="editarNota(nota)" v-if="modoEditar">
+                    <div class="form-group">
+                      <h3>Editar nota</h3>
+                      <input type="text" class="form-control mb-2"
+                      placeholder="Nombre de la nota" v-model="nota.nombre">
+                      <small id="emailHelp" class="form-text text-muted"> * Editar el titulo de la <strong>nota</strong>.</small>
+                      <textarea class="form-control  mb-2" placeholder="Descripción de la nota" v-model="nota.descripcion"  rows="7"></textarea>
+                      <hr><br>   
+                      <button class="btn btn-success" type="submit">Guardar <font-awesome-icon :icon="['fas', 'save']" /></button>
+                      <button class="btn btn-danger" type="submit" 
+                        @click="cancelarEdicion">Cancelar <font-awesome-icon :icon="['fas', 'times']" /></button>
+                    </div>
+                  </form>
+                  <form @submit.prevent="agregar" v-else>
+                    <div class="form-group">
+                      <h3>Agregar nota</h3>
+                      <input type="text" class="form-control mb-2" 
+                        placeholder="Nombre de la nota" v-model="nota.nombre">
+                        <small id="emailHelp" class="form-text text-muted"> * Agrega el titulo de la <strong>nota</strong>.</small>
+                        <textarea class="form-control  mb-2" placeholder="Descripción de la nota" v-model="nota.descripcion"  rows="7"></textarea>
+                        <hr><br> 
+                        <button class="btn btn-primary" type="submit">Agregar  <font-awesome-icon :icon="['fas', 'plus-circle']" /></button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+          </div>
+        </div>
+      </section>
+    </div>
+</div>
 </template>
 
 <script>
@@ -49,7 +80,7 @@ export default {
     }
   },
   created(){
-    axios.get('/notas').then(res=>{
+    axios.get('/intranet').then(res=>{
       this.notas = res.data;
     })
   },
@@ -61,7 +92,7 @@ export default {
       }
       const notaNueva = this.nota;
       this.nota = {nombre: '', descripcion: ''};    
-      axios.post('/notas', notaNueva)
+      axios.post('/intranet', notaNueva)
         .then((res) =>{
           const notaServidor = res.data;
           this.notas.push(notaServidor);
@@ -75,17 +106,19 @@ export default {
     },
     editarNota(nota){
       const params = {nombre: nota.nombre, descripcion: nota.descripcion};
-      axios.put(`/notas/${nota.id}`, params)
+      axios.put(`/intranet/${nota.id}`, params)
         .then(res=>{
           this.modoEditar = false;
           const index = this.notas.findIndex(item => item.id === nota.id);
           this.notas[index] = res.data;
+          this.nota.nombre= '';
+          this.nota.descripcion= ''; 
         })
     },
     eliminarNota(nota, index){
       const confirmacion = confirm(`Eliminar nota ${nota.nombre}`);
       if(confirmacion){
-        axios.delete(`/notas/${nota.id}`)
+        axios.delete(`/intranet/${nota.id}`)
           .then(()=>{
             this.notas.splice(index, 1);
           })
@@ -98,3 +131,8 @@ export default {
   }
 }
 </script>
+<style lang="stylus">
+.borderTopBl{
+  border-top: solid 1px #212121 !important;
+}
+</style>

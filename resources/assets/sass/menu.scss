@@ -1,3 +1,4 @@
+//https://fontawesome.com/v4.7.0/icons/
 @import url(//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css);
 @import url(https://fonts.googleapis.com/css?family=Titillium+Web:300);
 .fa-2x {
@@ -18,10 +19,6 @@ li#IntranetLisat {
     background: #fff !important;
 }
 
-.menu-left {
-    margin-left: 60px !important;
-}
-
 .main-menu:hover,
 nav.main-menu.expanded {
     width: 250px;
@@ -31,7 +28,7 @@ nav.main-menu.expanded {
 .main-menu {
     background: #212121;
     border-right: 1px solid #e5e5e5;
-    position: absolute;
+    position: fixed;
     top: 0px;
     bottom: 0;
     height: 100%;

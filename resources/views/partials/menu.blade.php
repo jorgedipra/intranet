@@ -1,13 +1,22 @@
-<nav class="main-menu">
+<nav class="main-menu d-none d-sm-none d-md-block">
     <ul>
         <li id="IntranetLisat">
-            <a href="/">
-                <i class="fa fa-home fa-2x"></i>
+            <a href="{{ url('/intranet') }}">
+                <i class="fa fa-list fa-2x"></i>
                 <span class="nav-text">
                     Intranet
                 </span>
             </a>
           
+        </li>
+        <li class="has-subnav">
+            <a href="{{ url('/home') }}">
+                <i class="fa fa-home fa-2x"></i>
+                <span class="nav-text">
+                    Home
+                </span>
+            </a>
+            
         </li>
         <li class="has-subnav">
             <a href="#">

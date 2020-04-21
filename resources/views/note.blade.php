@@ -4,13 +4,13 @@
 @include('partials.menu')
 <div class="container menu-left">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-12">
             <div class="card">
-                <div class="card-header">App de notas</div>
-                <div class="card-body">
+                <div class="card-header">
+                    <h2>Pendientes</h2>
+                </div>
                     <tareas-components>
                     </tareas-components>
-                </div>
             </div>
         </div>
     </div>
