@@ -1,8 +1,9 @@
 <?php
-
+// https://bluuweb.github.io/tutorial-laravel/vue/#componente-con-vue-js
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Nota;
 
 class NotaController extends Controller
 {
@@ -13,10 +14,12 @@ class NotaController extends Controller
      */
     public function index(Request $request)
     {   
+        // return Nota::where('user_id', auth()->id())->get();
+
         if($request->ajax()){
             return Nota::where('user_id', auth()->id())->get();
         }else{
-            return view('home');
+            return view('note');
         }
     } 
 

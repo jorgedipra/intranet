@@ -8,17 +8,17 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
-
+    <title>{{ config('app.name', 'Intranet') }}</title>
+	<link rel="shortcut icon" href="/image/h1.ico" />
+	<link rel="apple-touch-icon" href="/image/h1.jpg" />	
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-default navbar-static-top">
+        <nav class="navbar navbar-default navbar-static-top menu-left">
             <div class="container">
                 <div class="navbar-header">
-
                     <!-- Collapsed Hamburger -->
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
                         <span class="sr-only">Toggle Navigation</span>
@@ -26,10 +26,10 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-
                     <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('/') }}">
-                        {{ config('app.name', 'Laravel') }}
+                    <a class="navbar-brand col" href="{{ url('/') }}">
+                        <img src="/image/h1.jpg"  id="nav-logo" width="30" height="30" style="display: inline;border-radius: 100%;" class="d-inline-block align-top" alt="Jorgedipra" title="logo-Jorgedipra">
+                        {{ config('app.name', 'Intranet') }}
                     </a>
                 </div>
 
