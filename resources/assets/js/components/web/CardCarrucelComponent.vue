@@ -19,8 +19,17 @@
                 <div class="tab-pane fade show active in" id="home" role="tabpanel" aria-labelledby="home-tab">
                     <section class="row">
                         <div class="col-12"> &nbsp; </div>
+                        <div class="col-12 row">
+                            <div class="col-6">
+                                <input type="text" class="form-control mb-2" placeholder="Titulo de la card" v-model='data.carrusel[0].Title' >
+                            </div>
+                            <div class="col-6">
+                                <input type="text" class="form-control mb-2" placeholder="SubTitulo de la card" v-model='data.carrusel[0].SubTitle'>
+                            </div>
+                        </div>
+                        <div class="col-12"> <hr> </div>
                         <div class="col-6">
-                            <img src="http://localhost:8001/storage/public/home/img1.png" width="90%" alt="Card image cap" class="img-thumbnail"> 
+                            <img v-bind:src="API_IMG + data.carrusel[0].Url" width="90%" alt="Card image cap" class="img-thumbnail img-center"> 
                             <small class="form-text text-muted"> &nbsp;&nbsp;*Tamaño <strong>700 X 350</strong></small>
                         </div>
                         <div class="form-group col-6">
@@ -29,19 +38,70 @@
                         </div>
                     </section>
                 </div>
-                <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">...</div>
-                <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">...</div>
+                <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                    <section class="row">
+                        <div class="col-12"> &nbsp; </div>
+                        <div class="col-12 row">
+                            <div class="col-6">
+                                <input type="text" class="form-control mb-2" placeholder="Titulo de la card" v-model='data.carrusel[1].Title' >
+                            </div>
+                            <div class="col-6">
+                                <input type="text" class="form-control mb-2" placeholder="SubTitulo de la card" v-model='data.carrusel[1].SubTitle'>
+                            </div>
+                        </div>
+                        <div class="col-12"> <hr> </div>
+                        <div class="col-6">
+                            <img v-bind:src="API_IMG + data.carrusel[1].Url" width="90%" alt="Card image cap" class="img-thumbnail img-center"> 
+                            <small class="form-text text-muted"> &nbsp;&nbsp;*Tamaño <strong>700 X 350</strong></small>
+                        </div>
+                        <div class="form-group col-6">
+                            Selecciona una imagen en formato PNG de tamaño inferior a 1MB.<br/>
+                            <input type="file" name="fimagen" accept="image/gif, image/jpeg, image/png"/>
+                        </div>
+                    </section>
+                </div>
+                <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+                    <section class="row">
+                        <div class="col-12"> &nbsp; </div>
+                        <div class="col-12 row">
+                            <div class="col-6">
+                                <input type="text" class="form-control mb-2" placeholder="Titulo de la card" v-model='data.carrusel[2].Title' >
+                            </div>
+                            <div class="col-6">
+                                <input type="text" class="form-control mb-2" placeholder="SubTitulo de la card" v-model='data.carrusel[2].SubTitle'>
+                            </div>
+                        </div>
+                        <div class="col-12"> <hr> </div>
+                        <div class="col-6">
+                            <img v-bind:src="API_IMG + data.carrusel[2].Url" width="90%" alt="Card image cap" class="img-thumbnail img-center"> 
+                            <small class="form-text text-muted"> &nbsp;&nbsp;*Tamaño <strong>700 X 350</strong></small>
+                        </div>
+                        <div class="form-group col-6">
+                            Selecciona una imagen en formato PNG de tamaño inferior a 1MB.<br/>
+                            <input type="file" name="fimagen" accept="image/gif, image/jpeg, image/png"/>
+                        </div>
+                    </section>
+                </div>
             </div>
 
     </div>
 </div>
 </template>
 <script>
-    export default {
-        mounted() {
-            console.log('Component mounted.')
-        }
-    }
+export default {
+     props: {
+          data: {},
+        },
+    data() {
+      return {
+        dataCarrusel: [],
+        API_IMG: API_BACKEND_IMG,
+      }
+    },
+     mounted() {
+        this.dataCarrusel = this.data.carrusel
+     }
+}
 </script>
 <style lang="stylus">
 colorborde = #e2e2e2;

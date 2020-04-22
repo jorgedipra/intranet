@@ -15,14 +15,16 @@
                         <div class="col-12"> &nbsp; </div>
                         <div class="col-4">
                             <cardpresent-components
-                            :date="{{ json_encode($data) }}">
+                            :data="{{ json_encode($data) }}">
                             </cardpresent-components>
                         </div>
                         <div class="col-7">
-                            <cardfrase-components>
+                            <cardfrase-components
+                            :data="{{ json_encode($data) }}">
                             </cardfrase-components>
                             <hr>
-                            <cardcarrucel-components>
+                            <cardcarrucel-components
+                            :data="{{ json_encode($data) }}">
                             </cardcarrucel-components>
                         </div> 
                         <div class="col-12"> &nbsp; </div>
