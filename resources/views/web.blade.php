@@ -14,7 +14,8 @@
                     <div class="row">
                         <div class="col-12"> &nbsp; </div>
                         <div class="col-4">
-                            <cardpresent-components>
+                            <cardpresent-components
+                            :date="{{ json_encode($data) }}">
                             </cardpresent-components>
                         </div>
                         <div class="col-7">

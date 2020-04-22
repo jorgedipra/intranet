@@ -231,6 +231,10 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
 
+
+        //curl
+        'cURL' => anlutro\cURL\Laravel\cURL::class,
+
     ],
 
 ];
