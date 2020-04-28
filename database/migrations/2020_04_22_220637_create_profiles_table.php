@@ -4,17 +4,15 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePerfilTable extends Migration
+class CreateProfilesTable extends Migration
 {
     /**
      * Schema table name to migrate
      * @var string
      */
-    public $tableName = 'perfil';
-
+    public $tableName = 'profiles';
     /**
      * Run the migrations.
-     * @table perfil
      *
      * @return void
      */
@@ -22,7 +20,7 @@ class CreatePerfilTable extends Migration
     {
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->engine = 'InnoDB';
-            $table->increments('Id');
+            $table->increments('id');
             $table->integer('Id_User');
             $table->string('Nombre', 30)->comment('nombre de la persona');
             $table->string('Apellido', 30);

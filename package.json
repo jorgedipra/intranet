@@ -28,5 +28,8 @@
         "stylus": "^0.54.7",
         "stylus-loader": "^2.5.1",
         "vue": "^2.1.10"
+    },
+    "dependencies": {
+        "toastr": "^2.1.4"
     }
 }

@@ -30,15 +30,7 @@ class CreatePaginasTable extends Migration
             $table->string('Color', 20)->comment('Color letra');
             $table->string('Fondo', 20)->comment('Color de Fondo');
             $table->string('Descripcion', 100)->comment('nota');
-            $table->integer('Id_categoria')->comment('Categórica ')->unsigned();
-
-            $table->index(["Id_categoria"], 'IdCategoria');
-
-
-            $table->foreign('Id_categoria', 'IdCategoria')
-                ->references('Id')->on('categoria')
-                ->onDelete('cascade')
-                ->onUpdate('cascade');
+            $table->integer('Id_categoria')->comment('Categórica ');
         });
     }
 

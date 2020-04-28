@@ -23455,3 +23455,49 @@ a {
   color: #fff;
 }
 
+._alerts {
+  position: fixed;
+  margin-bottom: -75px;
+  right: 0;
+}
+
+._alerts:nth-child(1) {
+  bottom: 75px;
+}
+
+._alerts:nth-child(2) {
+  bottom: 150px;
+}
+
+._alerts:nth-child(3) {
+  bottom: 225px;
+}
+
+._alerts:nth-child(4) {
+  bottom: 300px;
+}
+
+._alerts:nth-child(5) {
+  bottom: 375px;
+}
+
+._alerts:nth-child(6) {
+  bottom: 450px;
+}
+
+._alerts:nth-child(7) {
+  bottom: 525px;
+}
+
+._alerts:nth-child(8) {
+  bottom: 600px;
+}
+
+._alerts:nth-child(9) {
+  bottom: 675px;
+}
+
+._alerts:nth-child(10) {
+  bottom: 750px;
+}
+

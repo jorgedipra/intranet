@@ -24,15 +24,7 @@ class CreateCategoriaTable extends Migration
             $table->engine = 'InnoDB';
             $table->increments('Id');
             $table->string('Nombre', 20)->comment('Nombre de la categoria');
-            $table->integer('Id_User')->comment('Perfil')->unsigned();
-
-            $table->index(["Id_User"], 'UserId');
-
-
-            $table->foreign('Id_User', 'UserId')
-                ->references('Id')->on('perfil')
-                ->onDelete('cascade')
-                ->onUpdate('cascade');
+            $table->integer('Id_User')->comment('Perfil');
         });
     }
 

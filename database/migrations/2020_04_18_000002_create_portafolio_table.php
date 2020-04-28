@@ -29,6 +29,8 @@ class CreatePortafolioTable extends Migration
             $table->string('Color', 20);
             $table->string('Fondo', 100);
             $table->string('Descripcion', 100);
+
+            $table->index(["Id"], 'Id_index');
         });
     }
 
