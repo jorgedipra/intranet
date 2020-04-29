@@ -59355,6 +59355,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: {
@@ -59364,6 +59366,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         return {
             dataPerfil: [],
             API_IMG: API_BACKEND_IMG,
+            imagenMiniatura: '',
             perfil: {
                 Title_card: '',
                 Nombre: '',
@@ -59376,6 +59379,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     mounted: function mounted() {
         this.dataPerfil = this.data.perfil;
+        this.imagenMiniatura = this.API_IMG + '/' + this.dataPerfil[0].Imagen;
     },
 
     methods: {
@@ -59385,23 +59389,37 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.perfil.Apellido = item.Apellido;
             this.perfil.Cargo = item.Cargo;
             this.perfil.Empresa = item.Empresa;
-            this.Editar(this.perfil);
+            // this.Editar(this.perfil)            
         },
         processFile: function processFile(event) {
-            this.perfil.Imagen = event.target.files[0].name;
-            //console.log(event.target.files[0]);
+            var file = event.target.files[0];
+            this.perfil.Imagen = file;
+            // console.log(file);
+            this.cargaImagen(file);
         },
-        Editar: function Editar(perfil) {
-            var params = {
-                Title_card: perfil.Title_card,
-                Nombre: perfil.Nombre,
-                Apellido: perfil.Apellido,
-                Cargo: perfil.Cargo,
-                Empresa: perfil.Empresa,
-                Imagen: perfil.Imagen
-            };
+        cargaImagen: function cargaImagen(file) {
+            var _this = this;
 
-            axios.post('/web/update_presentation', params).then(function (response) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                _this.imagenMiniatura = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        },
+        addProduct: function addProduct(formData) {
+            var formData = new FormData();
+            formData.append('Title_card', this.perfil.Title_card);
+            formData.append('Nombre', this.perfil.Nombre);
+            formData.append('Apellido', this.perfil.Apellido);
+            formData.append('Cargo', this.perfil.Cargo);
+            formData.append('Empresa', this.perfil.Empresa);
+            formData.append('Imagen', this.perfil.Imagen);
+            formData.append('originalname', this.perfil.Imagen.name);
+            this.Editar(formData);
+        },
+        Editar: function Editar(formData) {
+
+            axios.post('/web/update_presentation', formData).then(function (response) {
                 // handle success
                 // console.log(response);
                 var msg = '';
@@ -59423,6 +59441,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             });
         } //::END
 
+    },
+    computed: {
+        imagen: function imagen() {
+            return this.imagenMiniatura;
+        }
     }
 });
 
@@ -59444,165 +59467,179 @@ var render = function() {
       _vm._v(" "),
       _vm._l(_vm.dataPerfil, function(item) {
         return _c("div", { key: item.id, staticClass: "card-body" }, [
-          _c("div", { staticClass: "form-group" }, [
-            _vm._v(
-              "\r\n            Selecciona una imagen en formato PNG de tamaño inferior a 1MB."
-            ),
-            _c("br"),
-            _vm._v(" "),
-            _c("input", {
-              attrs: {
-                type: "file",
-                name: "fimagen",
-                accept: "image/gif, image/jpeg, image/png"
-              },
-              on: {
-                change: function($event) {
-                  return _vm.processFile($event)
-                }
-              }
-            })
-          ]),
-          _vm._v(" "),
-          _c("img", {
-            staticClass: "img-thumbnail",
-            attrs: { src: _vm.API_IMG + item.Imagen, alt: "Card image cap" }
-          }),
-          _vm._v(" "),
-          _c("hr"),
-          _vm._v(" "),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: item.Title_card,
-                expression: "item.Title_card"
-              }
-            ],
-            staticClass: "form-control mb-2",
-            attrs: { type: "text", placeholder: "Titulo de la card" },
-            domProps: { value: item.Title_card },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.$set(item, "Title_card", $event.target.value)
-              }
-            }
-          }),
-          _vm._v(" "),
-          _vm._m(0, true),
-          _vm._v(" "),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: item.Nombre,
-                expression: "item.Nombre"
-              }
-            ],
-            staticClass: "form-control mb-2",
-            attrs: { type: "text", placeholder: "Nombre" },
-            domProps: { value: item.Nombre },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.$set(item, "Nombre", $event.target.value)
-              }
-            }
-          }),
-          _vm._v(" "),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: item.Apellido,
-                expression: "item.Apellido"
-              }
-            ],
-            staticClass: "form-control mb-2",
-            attrs: { type: "text", placeholder: "Apellido" },
-            domProps: { value: item.Apellido },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.$set(item, "Apellido", $event.target.value)
-              }
-            }
-          }),
-          _vm._v(" "),
-          _c("hr"),
-          _vm._v(" "),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: item.Cargo,
-                expression: "item.Cargo"
-              }
-            ],
-            staticClass: "form-control mb-2",
-            attrs: { type: "text", placeholder: "Cargo" },
-            domProps: { value: item.Cargo },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.$set(item, "Cargo", $event.target.value)
-              }
-            }
-          }),
-          _vm._v(" "),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: item.Empresa,
-                expression: "item.Empresa"
-              }
-            ],
-            staticClass: "form-control mb-2",
-            attrs: { type: "text", placeholder: "Empresa" },
-            domProps: { value: item.Empresa },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.$set(item, "Empresa", $event.target.value)
-              }
-            }
-          }),
-          _vm._v(" "),
-          _c("hr"),
-          _vm._v(" "),
           _c(
-            "button",
+            "form",
             {
-              staticClass: "btn btn-success",
-              attrs: { id: "btn-save-card", type: "submit" },
+              attrs: { enctype: "multipart/form-data" },
               on: {
-                click: function($event) {
-                  return _vm.editarFormulario(item)
+                submit: function($event) {
+                  $event.preventDefault()
+                  return _vm.addProduct($event)
                 }
               }
             },
             [
-              _vm._v("Guardar "),
-              _c("font-awesome-icon", { attrs: { icon: ["fas", "save"] } })
-            ],
-            1
+              _c("div", { staticClass: "form-group" }, [
+                _vm._v(
+                  "\r\n                Selecciona una imagen en formato PNG de tamaño inferior a 1MB."
+                ),
+                _c("br"),
+                _vm._v(" "),
+                _c("input", {
+                  attrs: {
+                    type: "file",
+                    name: "fimagen",
+                    accept: "image/gif, image/jpeg, image/png"
+                  },
+                  on: {
+                    change: function($event) {
+                      return _vm.processFile($event)
+                    }
+                  }
+                })
+              ]),
+              _vm._v(" "),
+              _c("img", {
+                staticClass: "img-thumbnail",
+                attrs: { src: _vm.imagen, alt: "Card image cap" }
+              }),
+              _vm._v(" "),
+              _c("hr"),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: item.Title_card,
+                    expression: "item.Title_card"
+                  }
+                ],
+                staticClass: "form-control mb-2",
+                attrs: { type: "text", placeholder: "Titulo de la card" },
+                domProps: { value: item.Title_card },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(item, "Title_card", $event.target.value)
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _vm._m(0, true),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: item.Nombre,
+                    expression: "item.Nombre"
+                  }
+                ],
+                staticClass: "form-control mb-2",
+                attrs: { type: "text", placeholder: "Nombre" },
+                domProps: { value: item.Nombre },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(item, "Nombre", $event.target.value)
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: item.Apellido,
+                    expression: "item.Apellido"
+                  }
+                ],
+                staticClass: "form-control mb-2",
+                attrs: { type: "text", placeholder: "Apellido" },
+                domProps: { value: item.Apellido },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(item, "Apellido", $event.target.value)
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _c("hr"),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: item.Cargo,
+                    expression: "item.Cargo"
+                  }
+                ],
+                staticClass: "form-control mb-2",
+                attrs: { type: "text", placeholder: "Cargo" },
+                domProps: { value: item.Cargo },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(item, "Cargo", $event.target.value)
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: item.Empresa,
+                    expression: "item.Empresa"
+                  }
+                ],
+                staticClass: "form-control mb-2",
+                attrs: { type: "text", placeholder: "Empresa" },
+                domProps: { value: item.Empresa },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(item, "Empresa", $event.target.value)
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _c("hr"),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-success",
+                  attrs: { id: "btn-save-card", type: "submit" },
+                  on: {
+                    click: function($event) {
+                      return _vm.editarFormulario(item)
+                    }
+                  }
+                },
+                [
+                  _vm._v("Guardar "),
+                  _c("font-awesome-icon", { attrs: { icon: ["fas", "save"] } })
+                ],
+                1
+              )
+            ]
           )
         ])
       })

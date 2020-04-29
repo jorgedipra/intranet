@@ -4,22 +4,24 @@
         Card Presentación
     </div>
     <div class="card-body" v-for="item in dataPerfil" :key="item.id" >
-        <div class="form-group">
-            Selecciona una imagen en formato PNG de tamaño inferior a 1MB.<br/>
-            <input type="file" name="fimagen" accept="image/gif, image/jpeg, image/png" @change="processFile($event)"/>
-        </div>
-        <img  v-bind:src="API_IMG + item.Imagen" alt="Card image cap" class="img-thumbnail"> 
-        <hr>
-        <input type="text" class="form-control mb-2" placeholder="Titulo de la card" v-model="item.Title_card" >
-        <small id="emailHelp" class="form-text text-muted"> *Nombre de la pagina <strong>Title_card</strong>.</small>
-        <input type="text" class="form-control mb-2" placeholder="Nombre" v-model="item.Nombre">
-        <input type="text" class="form-control mb-2" placeholder="Apellido" v-model="item.Apellido">
-        <hr>
-        <input type="text" class="form-control mb-2" placeholder="Cargo" v-model="item.Cargo">
-        <input type="text" class="form-control mb-2" placeholder="Empresa" v-model="item.Empresa">
-        <hr>
-        <button  id="btn-save-card" class="btn btn-success" type="submit" 
-            @click="editarFormulario(item)">Guardar <font-awesome-icon :icon="['fas', 'save']" /></button>
+        <form @submit.prevent="addProduct" enctype="multipart/form-data">
+            <div class="form-group">
+                Selecciona una imagen en formato PNG de tamaño inferior a 1MB.<br/>
+                <input type="file" name="fimagen" accept="image/gif, image/jpeg, image/png" @change="processFile($event)"/>
+            </div>
+            <img  v-bind:src="imagen" alt="Card image cap" class="img-thumbnail"> 
+            <hr>
+            <input type="text" class="form-control mb-2" placeholder="Titulo de la card" v-model="item.Title_card" >
+            <small id="emailHelp" class="form-text text-muted"> *Nombre de la pagina <strong>Title_card</strong>.</small>
+            <input type="text" class="form-control mb-2" placeholder="Nombre" v-model="item.Nombre">
+            <input type="text" class="form-control mb-2" placeholder="Apellido" v-model="item.Apellido">
+            <hr>
+            <input type="text" class="form-control mb-2" placeholder="Cargo" v-model="item.Cargo">
+            <input type="text" class="form-control mb-2" placeholder="Empresa" v-model="item.Empresa">
+            <hr>
+            <button  id="btn-save-card" class="btn btn-success" type="submit" 
+                @click="editarFormulario(item)">Guardar <font-awesome-icon :icon="['fas', 'save']" /></button>
+        </form>
     </div>    
 </div>
 </template>
@@ -32,6 +34,7 @@
       return {
         dataPerfil: [],
         API_IMG: API_BACKEND_IMG,
+        imagenMiniatura: '',
         perfil: {
             Title_card: '',
             Nombre: '',
@@ -43,7 +46,8 @@
       }
     },
      mounted() {
-        this.dataPerfil = this.data.perfil
+        this.dataPerfil = this.data.perfil;
+        this.imagenMiniatura=this.API_IMG +'/'+ this.dataPerfil[0].Imagen;
      },
       methods:{
            editarFormulario(item){
@@ -52,23 +56,35 @@
                 this.perfil.Apellido = item.Apellido
                 this.perfil.Cargo = item.Cargo
                 this.perfil.Empresa = item.Empresa
-                this.Editar(this.perfil)            
+                // this.Editar(this.perfil)            
            },
            processFile(event) {
-                this.perfil.Imagen = event.target.files[0].name
-                //console.log(event.target.files[0]);
+                let file = event.target.files[0];
+                this.perfil.Imagen = file;
+                // console.log(file);
+                this.cargaImagen(file);
             },
-            Editar(perfil){
-                const params = {
-                    Title_card: perfil.Title_card, 
-                    Nombre: perfil.Nombre,
-                    Apellido: perfil.Apellido,
-                    Cargo: perfil.Cargo,
-                    Empresa: perfil.Empresa,
-                    Imagen: perfil.Imagen,
-                    };
-                    
-                axios.post('/web/update_presentation', params)
+            cargaImagen(file){
+                let reader = new FileReader();
+                reader.onload = (e)=>{
+                    this.imagenMiniatura = e.target.result;
+                }
+                reader.readAsDataURL(file);
+            },
+            addProduct(formData){
+                var formData = new FormData();
+                formData.append('Title_card',this.perfil.Title_card);
+                formData.append('Nombre',this.perfil.Nombre);
+                formData.append('Apellido',this.perfil.Apellido);
+                formData.append('Cargo',this.perfil.Cargo);
+                formData.append('Empresa',this.perfil.Empresa);
+                formData.append('Imagen',this.perfil.Imagen);
+                formData.append('originalname',this.perfil.Imagen.name);
+                this.Editar(formData)
+            },
+            Editar(formData){
+                 
+                axios.post('/web/update_presentation', formData)
                 .then(function (response) {
                     // handle success
                     // console.log(response);
@@ -95,6 +111,11 @@
                 
             }//::END
       },
+      computed:{
+            imagen(){                
+                return this.imagenMiniatura;
+            }
+      }
   }
 </script>
 <style lang="stylus">
