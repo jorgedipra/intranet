@@ -31,6 +31,7 @@ class CreateProfilesTable extends Migration
             $table->string('Empresa', 20)->comment('Empresa en la que trabaja');
             $table->string('Titulo_frase', 20)->comment('titulo de la frase');
             $table->string('Frase', 200)->comment('fase y autor');
+            $table->text('Imagen2')->nullable()->default(null)->comment('imagen de frase');
         });
     }
 

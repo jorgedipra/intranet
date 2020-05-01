@@ -43,5 +43,28 @@ class webController extends Controller
         }
 
         return  $resul;
-    }
+    }//END=>update_presentation
+
+    public function update_frase(Request $request)
+    {
+        $Perfil = Profile::find(1);
+
+        $Perfil->Titulo_frase = $request->Titulo_frase;
+        $Perfil->Frase = utf8_encode($request->Frase);
+    
+        if($request->Imagen2!=null or $request->Imagen2 !=''){
+            $request->file('Imagen2');
+            $path =Storage::disk('public')->put('image',$request->file('Imagen2'));
+            $Perfil->Imagen2 = $path;
+        }
+        try {
+            $Perfil->save();
+            $resul = "200";  
+        } catch (\Exception $e) {
+            $resul = '204';
+        }
+
+        return  $resul;
+    }//END=>update_presentation
+
 }//::END class

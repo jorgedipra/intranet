@@ -59758,7 +59758,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n.img-center {\n  display: block;\n  margin: auto;\n}\n", ""]);
+exports.push([module.i, "\n.img-center {\n  display: block;\n  margin: auto;\n}\n#btn-save-card2 {\n  float: right;\n}\n", ""]);
 
 // exports
 
@@ -59791,21 +59791,96 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: {
-    data: {}
-  },
-  data: function data() {
-    return {
-      dataPerfil: [],
-      API_IMG: API_BACKEND_IMG
-    };
-  },
-  mounted: function mounted() {
+    props: {
+        data: {}
+    },
+    data: function data() {
+        return {
+            dataPerfil: [],
+            API_IMG: API_BACKEND_IMG,
+            imagenMiniatura: '',
+            perfil: {
+                Titulo_frase: '',
+                Frase: '',
+                Imagen2: ''
+            }
+        };
+    },
+    mounted: function mounted() {
+        this.dataPerfil = this.data.perfil;
+        console.log(">>" + this.dataPerfil[0].Imagen2);
 
-    this.dataPerfil = this.data.perfil;
-  }
+        this.imagenMiniatura = this.API_IMG + '/' + this.dataPerfil[0].Imagen2;
+    },
+
+    methods: {
+        editarFormulario: function editarFormulario(item) {
+            this.perfil.Titulo_frase = item.Titulo_frase;
+            this.perfil.Frase = item.Frase;
+        },
+        processFile: function processFile(event) {
+            var file = event.target.files[0];
+            this.perfil.Imagen2 = file;
+            // console.log(file);
+            this.cargaImagen(file);
+        },
+        cargaImagen: function cargaImagen(file) {
+            var _this = this;
+
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                // console.log(e.target.result)
+                _this.imagenMiniatura = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        },
+        addProduct: function addProduct(formData) {
+            var formData = new FormData();
+            formData.append('Titulo_frase', this.perfil.Titulo_frase);
+            formData.append('Frase', this.perfil.Frase);
+            formData.append('Imagen2', this.perfil.Imagen2);
+            formData.append('originalname', this.perfil.Imagen2.name);
+            this.Editar(formData);
+        },
+        Editar: function Editar(formData) {
+
+            axios.post('/web/update_frase', formData).then(function (response) {
+                // handle success
+                // console.log(response);
+                var msg = '';
+                if (response.data == '200') {
+                    msg = "Actulización exitosa, codigo: [ " + response.data + " ]";
+                    Alerts.windows('alert-success', 'success', msg);
+                } else {
+                    msg = "Proceso parcialmente Exitoso, Problemas en la consulta, codigo: [ " + response.data + " ]";
+                    Alerts.windows('alert-warning', 'warning', msg);
+                }
+            }).catch(function (error) {
+                // handle error
+                // console.log(error);
+                var msg = '';
+                msg = "Ocurrio algo, Error: [ " + error + " ]";
+                Alerts.windows('alert-danger', 'danger', msg);
+            }).then(function () {
+                // always executed
+            });
+        } //::END
+
+    },
+    computed: {
+        imagen: function imagen() {
+            return this.imagenMiniatura;
+        }
+    }
 });
 
 /***/ }),
@@ -59826,93 +59901,132 @@ var render = function() {
       _vm._v(" "),
       _vm._l(_vm.dataPerfil, function(item) {
         return _c("div", { key: item.id, staticClass: "card-body" }, [
-          _c("div", { staticClass: "row" }, [
-            _c("div", { staticClass: "col-4" }, [
-              _c("img", {
-                staticClass: "img-circle img-center",
-                attrs: {
-                  src: _vm.API_IMG + "/storage/web/landing/estiveJ.png",
-                  width: "80px",
-                  alt: "Card image cap"
+          _c(
+            "form",
+            {
+              attrs: { enctype: "multipart/form-data" },
+              on: {
+                submit: function($event) {
+                  $event.preventDefault()
+                  return _vm.addProduct($event)
                 }
-              }),
-              _vm._v(" "),
-              _vm._m(0, true)
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-8" }, [
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: item.Titulo_frase,
-                    expression: "item.Titulo_frase"
-                  }
-                ],
-                staticClass: "form-control mb-2",
-                attrs: { type: "text", placeholder: "Titulo de la Frase" },
-                domProps: { value: item.Titulo_frase },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
+              }
+            },
+            [
+              _c("div", { staticClass: "row" }, [
+                _c("div", { staticClass: "col-4" }, [
+                  _c("img", {
+                    staticClass: "img-circle img-center",
+                    attrs: {
+                      src: _vm.imagen,
+                      alt: "Card image frase",
+                      width: "80px"
                     }
-                    _vm.$set(item, "Titulo_frase", $event.target.value)
-                  }
-                }
-              }),
-              _vm._v(" "),
-              _c("textarea", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: item.Frase,
-                    expression: "item.Frase"
-                  }
-                ],
-                staticClass: "form-control  mb-2",
-                attrs: { placeholder: "Descripción de la Frase", rows: "7" },
-                domProps: { value: item.Frase },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
+                  }),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group" }, [
+                    _vm._v(
+                      "\r\n                    Selecciona una imagen en formato PNG de tamaño inferior a 1MB."
+                    ),
+                    _c("br"),
+                    _vm._v(" "),
+                    _c("input", {
+                      attrs: {
+                        type: "file",
+                        name: "fimagen",
+                        accept: "image/gif, image/jpeg, image/png"
+                      },
+                      on: {
+                        change: function($event) {
+                          return _vm.processFile($event)
+                        }
+                      }
+                    })
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-8" }, [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: item.Titulo_frase,
+                        expression: "item.Titulo_frase"
+                      }
+                    ],
+                    staticClass: "form-control mb-2",
+                    attrs: { type: "text", placeholder: "Titulo de la Frase" },
+                    domProps: { value: item.Titulo_frase },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(item, "Titulo_frase", $event.target.value)
+                      }
                     }
-                    _vm.$set(item, "Frase", $event.target.value)
-                  }
-                }
-              })
-            ])
-          ])
+                  }),
+                  _vm._v(" "),
+                  _c("textarea", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: item.Frase,
+                        expression: "item.Frase"
+                      }
+                    ],
+                    staticClass: "form-control  mb-2",
+                    attrs: {
+                      placeholder: "Descripción de la Frase",
+                      rows: "7"
+                    },
+                    domProps: { value: item.Frase },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(item, "Frase", $event.target.value)
+                      }
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-12" }, [
+                  _c("hr"),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-success",
+                      attrs: { id: "btn-save-card2", type: "submit" },
+                      on: {
+                        click: function($event) {
+                          return _vm.editarFormulario(item)
+                        }
+                      }
+                    },
+                    [
+                      _vm._v("Guardar "),
+                      _c("font-awesome-icon", {
+                        attrs: { icon: ["fas", "save"] }
+                      })
+                    ],
+                    1
+                  )
+                ])
+              ])
+            ]
+          )
         ])
       })
     ],
     2
   )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group" }, [
-      _vm._v(
-        "\r\n                    Selecciona una imagen en formato PNG de tamaño inferior a 1MB."
-      ),
-      _c("br"),
-      _vm._v(" "),
-      _c("input", {
-        attrs: {
-          type: "file",
-          name: "fimagen",
-          accept: "image/gif, image/jpeg, image/png"
-        }
-      })
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -60110,18 +60224,89 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: {
-    data: {}
-  },
-  data: function data() {
-    return {
-      dataCarrusel: [],
-      API_IMG: API_BACKEND_IMG
-    };
-  },
-  mounted: function mounted() {
-    this.dataCarrusel = this.data.carrusel;
-  }
+    props: {
+        data: {}
+    },
+    data: function data() {
+        return {
+            dataCarrusel: [],
+            API_IMG: API_BACKEND_IMG,
+            imagenMiniatura1: '',
+            imagenMiniatura2: '',
+            imagenMiniatura3: '',
+            carrusel: {
+                Title1: '',
+                SubTitle1: '',
+                Imagen1: '',
+                Title2: '',
+                SubTitle2: '',
+                Imagen2: '',
+                Title3: '',
+                SubTitle3: '',
+                Imagen3: ''
+            }
+
+        };
+    },
+    mounted: function mounted() {
+        this.dataCarrusel = this.data.carrusel;
+        // console.log(">>"+this.dataCarrusel[0].Url);
+        this.imagenMiniatura1 = this.API_IMG + '/' + this.dataCarrusel[0].Url;
+        this.imagenMiniatura2 = this.API_IMG + '/' + this.dataCarrusel[1].Url;
+        this.imagenMiniatura3 = this.API_IMG + '/' + this.dataCarrusel[2].Url;
+    },
+
+    methods: {
+        processFile1: function processFile1(event) {
+            var file = event.target.files[0];
+            this.dataCarrusel[0].Url = file;
+            // console.log(file);
+            this.cargaImagen(file, 1);
+        },
+        processFile2: function processFile2(event) {
+            var file = event.target.files[0];
+            this.dataCarrusel[1].Url = file;
+            // console.log(file);
+            this.cargaImagen(file, 2);
+        },
+        processFile3: function processFile3(event) {
+            var file = event.target.files[0];
+            this.dataCarrusel[2].Url = file;
+            // console.log(file);
+            this.cargaImagen(file, 3);
+        },
+        cargaImagen: function cargaImagen(file, i) {
+            var _this = this;
+
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                // console.log(e.target.result)
+                switch (i) {
+                    case 1:
+                        _this.imagenMiniatura1 = e.target.result;
+                        break;
+                    case 2:
+                        _this.imagenMiniatura2 = e.target.result;
+                        break;
+                    case 3:
+                        _this.imagenMiniatura3 = e.target.result;
+                        break;
+                }
+            };
+            reader.readAsDataURL(file);
+        }
+    },
+    computed: {
+        imagen1: function imagen1() {
+            return this.imagenMiniatura1;
+        },
+        imagen2: function imagen2() {
+            return this.imagenMiniatura2;
+        },
+        imagen3: function imagen3() {
+            return this.imagenMiniatura3;
+        }
+    }
 });
 
 /***/ }),
@@ -60222,7 +60407,7 @@ var render = function() {
                 _c("img", {
                   staticClass: "img-thumbnail img-center",
                   attrs: {
-                    src: _vm.API_IMG + _vm.data.carrusel[0].Url,
+                    src: _vm.imagen1,
                     width: "90%",
                     alt: "Card image cap"
                   }
@@ -60231,7 +60416,25 @@ var render = function() {
                 _vm._m(2)
               ]),
               _vm._v(" "),
-              _vm._m(3)
+              _c("div", { staticClass: "form-group col-6" }, [
+                _vm._v(
+                  "\r\n                            Selecciona una imagen en formato PNG de tamaño inferior a 1MB."
+                ),
+                _c("br"),
+                _vm._v(" "),
+                _c("input", {
+                  attrs: {
+                    type: "file",
+                    name: "fimagen",
+                    accept: "image/gif, image/jpeg, image/png"
+                  },
+                  on: {
+                    change: function($event) {
+                      return _vm.processFile1($event)
+                    }
+                  }
+                })
+              ])
             ])
           ]
         ),
@@ -60311,22 +60514,40 @@ var render = function() {
                 ])
               ]),
               _vm._v(" "),
-              _vm._m(4),
+              _vm._m(3),
               _vm._v(" "),
               _c("div", { staticClass: "col-6" }, [
                 _c("img", {
                   staticClass: "img-thumbnail img-center",
                   attrs: {
-                    src: _vm.API_IMG + _vm.data.carrusel[1].Url,
+                    src: _vm.imagen2,
                     width: "90%",
                     alt: "Card image cap"
                   }
                 }),
                 _vm._v(" "),
-                _vm._m(5)
+                _vm._m(4)
               ]),
               _vm._v(" "),
-              _vm._m(6)
+              _c("div", { staticClass: "form-group col-6" }, [
+                _vm._v(
+                  "\r\n                            Selecciona una imagen en formato PNG de tamaño inferior a 1MB."
+                ),
+                _c("br"),
+                _vm._v(" "),
+                _c("input", {
+                  attrs: {
+                    type: "file",
+                    name: "fimagen",
+                    accept: "image/gif, image/jpeg, image/png"
+                  },
+                  on: {
+                    change: function($event) {
+                      return _vm.processFile2($event)
+                    }
+                  }
+                })
+              ])
             ])
           ]
         ),
@@ -60406,22 +60627,40 @@ var render = function() {
                 ])
               ]),
               _vm._v(" "),
-              _vm._m(7),
+              _vm._m(5),
               _vm._v(" "),
               _c("div", { staticClass: "col-6" }, [
                 _c("img", {
                   staticClass: "img-thumbnail img-center",
                   attrs: {
-                    src: _vm.API_IMG + _vm.data.carrusel[2].Url,
+                    src: _vm.imagen3,
                     width: "90%",
                     alt: "Card image cap"
                   }
                 }),
                 _vm._v(" "),
-                _vm._m(8)
+                _vm._m(6)
               ]),
               _vm._v(" "),
-              _vm._m(9)
+              _c("div", { staticClass: "form-group col-6" }, [
+                _vm._v(
+                  "\r\n                            Selecciona una imagen en formato PNG de tamaño inferior a 1MB."
+                ),
+                _c("br"),
+                _vm._v(" "),
+                _c("input", {
+                  attrs: {
+                    type: "file",
+                    name: "fimagen",
+                    accept: "image/gif, image/jpeg, image/png"
+                  },
+                  on: {
+                    change: function($event) {
+                      return _vm.processFile3($event)
+                    }
+                  }
+                })
+              ])
             ])
           ]
         )
@@ -60516,25 +60755,6 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group col-6" }, [
-      _vm._v(
-        "\r\n                            Selecciona una imagen en formato PNG de tamaño inferior a 1MB."
-      ),
-      _c("br"),
-      _vm._v(" "),
-      _c("input", {
-        attrs: {
-          type: "file",
-          name: "fimagen",
-          accept: "image/gif, image/jpeg, image/png"
-        }
-      })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
     return _c("div", { staticClass: "col-12" }, [_c("hr")])
   },
   function() {
@@ -60550,25 +60770,6 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group col-6" }, [
-      _vm._v(
-        "\r\n                            Selecciona una imagen en formato PNG de tamaño inferior a 1MB."
-      ),
-      _c("br"),
-      _vm._v(" "),
-      _c("input", {
-        attrs: {
-          type: "file",
-          name: "fimagen",
-          accept: "image/gif, image/jpeg, image/png"
-        }
-      })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
     return _c("div", { staticClass: "col-12" }, [_c("hr")])
   },
   function() {
@@ -60578,25 +60779,6 @@ var staticRenderFns = [
     return _c("small", { staticClass: "form-text text-muted" }, [
       _vm._v("   *Tamaño "),
       _c("strong", [_vm._v("700 X 350")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group col-6" }, [
-      _vm._v(
-        "\r\n                            Selecciona una imagen en formato PNG de tamaño inferior a 1MB."
-      ),
-      _c("br"),
-      _vm._v(" "),
-      _c("input", {
-        attrs: {
-          type: "file",
-          name: "fimagen",
-          accept: "image/gif, image/jpeg, image/png"
-        }
-      })
     ])
   }
 ]
