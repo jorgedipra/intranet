@@ -60122,7 +60122,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n.tab .nav-item .nav-link {\n  border: solid 1px #e2e2e2;\n  color: #333;\n}\n", ""]);
+exports.push([module.i, "\n.tab .nav-item .nav-link {\n  border: solid 1px #e2e2e2;\n  color: #333;\n}\n#btn-save-card01,\n#btn-save-card02,\n#btn-save-card03 {\n  float: right;\n}\n", ""]);
 
 // exports
 
@@ -60222,91 +60222,127 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: {
-        data: {}
-    },
-    data: function data() {
-        return {
-            dataCarrusel: [],
-            API_IMG: API_BACKEND_IMG,
-            imagenMiniatura1: '',
-            imagenMiniatura2: '',
-            imagenMiniatura3: '',
-            carrusel: {
-                Title1: '',
-                SubTitle1: '',
-                Imagen1: '',
-                Title2: '',
-                SubTitle2: '',
-                Imagen2: '',
-                Title3: '',
-                SubTitle3: '',
-                Imagen3: ''
-            }
-
-        };
-    },
-    mounted: function mounted() {
-        this.dataCarrusel = this.data.carrusel;
-        // console.log(">>"+this.dataCarrusel[0].Url);
-        this.imagenMiniatura1 = this.API_IMG + '/' + this.dataCarrusel[0].Url;
-        this.imagenMiniatura2 = this.API_IMG + '/' + this.dataCarrusel[1].Url;
-        this.imagenMiniatura3 = this.API_IMG + '/' + this.dataCarrusel[2].Url;
-    },
-
-    methods: {
-        processFile1: function processFile1(event) {
-            var file = event.target.files[0];
-            this.dataCarrusel[0].Url = file;
-            // console.log(file);
-            this.cargaImagen(file, 1);
+        props: {
+                data: {}
         },
-        processFile2: function processFile2(event) {
-            var file = event.target.files[0];
-            this.dataCarrusel[1].Url = file;
-            // console.log(file);
-            this.cargaImagen(file, 2);
-        },
-        processFile3: function processFile3(event) {
-            var file = event.target.files[0];
-            this.dataCarrusel[2].Url = file;
-            // console.log(file);
-            this.cargaImagen(file, 3);
-        },
-        cargaImagen: function cargaImagen(file, i) {
-            var _this = this;
+        data: function data() {
+                return {
+                        dataCarrusel: [],
+                        API_IMG: API_BACKEND_IMG,
+                        imagenMiniatura1: '',
+                        imagenMiniatura2: '',
+                        imagenMiniatura3: '',
+                        carrusel: {
+                                Title1: '',
+                                SubTitle1: '',
+                                Imagen1: '',
+                                Title2: '',
+                                SubTitle2: '',
+                                Imagen2: '',
+                                Title3: '',
+                                SubTitle3: '',
+                                Imagen3: ''
+                        }
 
-            var reader = new FileReader();
-            reader.onload = function (e) {
-                // console.log(e.target.result)
-                switch (i) {
-                    case 1:
-                        _this.imagenMiniatura1 = e.target.result;
-                        break;
-                    case 2:
-                        _this.imagenMiniatura2 = e.target.result;
-                        break;
-                    case 3:
-                        _this.imagenMiniatura3 = e.target.result;
-                        break;
+                };
+        },
+        mounted: function mounted() {
+                this.dataCarrusel = this.data.carrusel;
+                // console.log(">>"+this.dataCarrusel[0].Url);
+                this.imagenMiniatura1 = this.API_IMG + '/' + this.dataCarrusel[0].Url;
+                this.imagenMiniatura2 = this.API_IMG + '/' + this.dataCarrusel[1].Url;
+                this.imagenMiniatura3 = this.API_IMG + '/' + this.dataCarrusel[2].Url;
+        },
+
+        methods: {
+                processFile1: function processFile1(event) {
+                        var file = event.target.files[0];
+                        this.carrusel.Imagen1 = file;
+                        // console.log(file);
+                        this.cargaImagen(file, 1);
+                },
+                processFile2: function processFile2(event) {
+                        var file = event.target.files[0];
+                        this.carrusel.Imagen2 = file;
+                        // console.log(file);
+                        this.cargaImagen(file, 2);
+                },
+                processFile3: function processFile3(event) {
+                        var file = event.target.files[0];
+                        this.carrusel.Imagen3 = file;
+                        // console.log(file);
+                        this.cargaImagen(file, 3);
+                },
+                cargaImagen: function cargaImagen(file, i) {
+                        var _this = this;
+
+                        var reader = new FileReader();
+                        reader.onload = function (e) {
+                                // console.log(e.target.result)
+                                switch (i) {
+                                        case 1:
+                                                _this.imagenMiniatura1 = e.target.result;
+                                                break;
+                                        case 2:
+                                                _this.imagenMiniatura2 = e.target.result;
+                                                break;
+                                        case 3:
+                                                _this.imagenMiniatura3 = e.target.result;
+                                                break;
+                                }
+                        };
+                        reader.readAsDataURL(file);
+                },
+                editarFormulario1: function editarFormulario1() {
+                        this.carrusel.Title1 = this.data.carrusel[0].Title;
+                        this.carrusel.SubTitle1 = this.data.carrusel[0].SubTitle;
+                },
+                addProduct1: function addProduct1(formData) {},
+                editarFormulario2: function editarFormulario2() {
+                        this.carrusel.Title2 = this.data.carrusel[1].Title;
+                        this.carrusel.SubTitle2 = this.data.carrusel[1].SubTitle;
+                },
+                addProduct2: function addProduct2(formData) {},
+                editarFormulario3: function editarFormulario3() {
+                        this.carrusel.Title3 = this.data.carrusel[2].Title;
+                        this.carrusel.SubTitle3 = this.data.carrusel[2].SubTitle;
+                },
+                addProduct3: function addProduct3(formData) {}
+        },
+        computed: {
+                imagen1: function imagen1() {
+                        return this.imagenMiniatura1;
+                },
+                imagen2: function imagen2() {
+                        return this.imagenMiniatura2;
+                },
+                imagen3: function imagen3() {
+                        return this.imagenMiniatura3;
                 }
-            };
-            reader.readAsDataURL(file);
         }
-    },
-    computed: {
-        imagen1: function imagen1() {
-            return this.imagenMiniatura1;
-        },
-        imagen2: function imagen2() {
-            return this.imagenMiniatura2;
-        },
-        imagen3: function imagen3() {
-            return this.imagenMiniatura3;
-        }
-    }
 });
 
 /***/ }),
@@ -60337,105 +60373,146 @@ var render = function() {
             }
           },
           [
-            _c("section", { staticClass: "row" }, [
-              _c("div", { staticClass: "col-12" }, [_vm._v("   ")]),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-12 row" }, [
-                _c("div", { staticClass: "col-6" }, [
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.data.carrusel[0].Title,
-                        expression: "data.carrusel[0].Title"
-                      }
-                    ],
-                    staticClass: "form-control mb-2",
-                    attrs: { type: "text", placeholder: "Titulo de la card" },
-                    domProps: { value: _vm.data.carrusel[0].Title },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
+            _c(
+              "form",
+              {
+                attrs: { enctype: "multipart/form-data" },
+                on: {
+                  submit: function($event) {
+                    $event.preventDefault()
+                    return _vm.addProduct1($event)
+                  }
+                }
+              },
+              [
+                _c("section", { staticClass: "row" }, [
+                  _c("div", { staticClass: "col-12" }, [_vm._v("   ")]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-12 row" }, [
+                    _c("div", { staticClass: "col-6" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.data.carrusel[0].Title,
+                            expression: "data.carrusel[0].Title"
+                          }
+                        ],
+                        staticClass: "form-control mb-2",
+                        attrs: {
+                          type: "text",
+                          placeholder: "Titulo de la card"
+                        },
+                        domProps: { value: _vm.data.carrusel[0].Title },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.data.carrusel[0],
+                              "Title",
+                              $event.target.value
+                            )
+                          }
                         }
-                        _vm.$set(
-                          _vm.data.carrusel[0],
-                          "Title",
-                          $event.target.value
-                        )
-                      }
-                    }
-                  })
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-6" }, [
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.data.carrusel[0].SubTitle,
-                        expression: "data.carrusel[0].SubTitle"
-                      }
-                    ],
-                    staticClass: "form-control mb-2",
-                    attrs: {
-                      type: "text",
-                      placeholder: "SubTitulo de la card"
-                    },
-                    domProps: { value: _vm.data.carrusel[0].SubTitle },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-6" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.data.carrusel[0].SubTitle,
+                            expression: "data.carrusel[0].SubTitle"
+                          }
+                        ],
+                        staticClass: "form-control mb-2",
+                        attrs: {
+                          type: "text",
+                          placeholder: "SubTitulo de la card"
+                        },
+                        domProps: { value: _vm.data.carrusel[0].SubTitle },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.data.carrusel[0],
+                              "SubTitle",
+                              $event.target.value
+                            )
+                          }
                         }
-                        _vm.$set(
-                          _vm.data.carrusel[0],
-                          "SubTitle",
-                          $event.target.value
-                        )
+                      })
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _vm._m(1),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-6" }, [
+                    _c("img", {
+                      staticClass: "img-thumbnail img-center",
+                      attrs: {
+                        src: _vm.imagen1,
+                        width: "90%",
+                        alt: "Card image cap"
                       }
-                    }
-                  })
+                    }),
+                    _vm._v(" "),
+                    _vm._m(2)
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group col-6" }, [
+                    _vm._v(
+                      "\r\n                            Selecciona una imagen en formato PNG de tamaño inferior a 1MB."
+                    ),
+                    _c("br"),
+                    _vm._v(" "),
+                    _c("input", {
+                      attrs: {
+                        type: "file",
+                        name: "fimagen",
+                        accept: "image/gif, image/jpeg, image/png"
+                      },
+                      on: {
+                        change: function($event) {
+                          return _vm.processFile1($event)
+                        }
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-12" }, [
+                    _c("hr"),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-success",
+                        attrs: { id: "btn-save-card01", type: "submit" },
+                        on: {
+                          click: function($event) {
+                            return _vm.editarFormulario1()
+                          }
+                        }
+                      },
+                      [
+                        _vm._v("Guardar "),
+                        _c("font-awesome-icon", {
+                          attrs: { icon: ["fas", "save"] }
+                        })
+                      ],
+                      1
+                    )
+                  ])
                 ])
-              ]),
-              _vm._v(" "),
-              _vm._m(1),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-6" }, [
-                _c("img", {
-                  staticClass: "img-thumbnail img-center",
-                  attrs: {
-                    src: _vm.imagen1,
-                    width: "90%",
-                    alt: "Card image cap"
-                  }
-                }),
-                _vm._v(" "),
-                _vm._m(2)
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "form-group col-6" }, [
-                _vm._v(
-                  "\r\n                            Selecciona una imagen en formato PNG de tamaño inferior a 1MB."
-                ),
-                _c("br"),
-                _vm._v(" "),
-                _c("input", {
-                  attrs: {
-                    type: "file",
-                    name: "fimagen",
-                    accept: "image/gif, image/jpeg, image/png"
-                  },
-                  on: {
-                    change: function($event) {
-                      return _vm.processFile1($event)
-                    }
-                  }
-                })
-              ])
-            ])
+              ]
+            )
           ]
         ),
         _vm._v(" "),
@@ -60450,105 +60527,146 @@ var render = function() {
             }
           },
           [
-            _c("section", { staticClass: "row" }, [
-              _c("div", { staticClass: "col-12" }, [_vm._v("   ")]),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-12 row" }, [
-                _c("div", { staticClass: "col-6" }, [
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.data.carrusel[1].Title,
-                        expression: "data.carrusel[1].Title"
-                      }
-                    ],
-                    staticClass: "form-control mb-2",
-                    attrs: { type: "text", placeholder: "Titulo de la card" },
-                    domProps: { value: _vm.data.carrusel[1].Title },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
+            _c(
+              "form",
+              {
+                attrs: { enctype: "multipart/form-data" },
+                on: {
+                  submit: function($event) {
+                    $event.preventDefault()
+                    return _vm.addProduct2($event)
+                  }
+                }
+              },
+              [
+                _c("section", { staticClass: "row" }, [
+                  _c("div", { staticClass: "col-12" }, [_vm._v("   ")]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-12 row" }, [
+                    _c("div", { staticClass: "col-6" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.data.carrusel[1].Title,
+                            expression: "data.carrusel[1].Title"
+                          }
+                        ],
+                        staticClass: "form-control mb-2",
+                        attrs: {
+                          type: "text",
+                          placeholder: "Titulo de la card"
+                        },
+                        domProps: { value: _vm.data.carrusel[1].Title },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.data.carrusel[1],
+                              "Title",
+                              $event.target.value
+                            )
+                          }
                         }
-                        _vm.$set(
-                          _vm.data.carrusel[1],
-                          "Title",
-                          $event.target.value
-                        )
-                      }
-                    }
-                  })
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-6" }, [
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.data.carrusel[1].SubTitle,
-                        expression: "data.carrusel[1].SubTitle"
-                      }
-                    ],
-                    staticClass: "form-control mb-2",
-                    attrs: {
-                      type: "text",
-                      placeholder: "SubTitulo de la card"
-                    },
-                    domProps: { value: _vm.data.carrusel[1].SubTitle },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-6" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.data.carrusel[1].SubTitle,
+                            expression: "data.carrusel[1].SubTitle"
+                          }
+                        ],
+                        staticClass: "form-control mb-2",
+                        attrs: {
+                          type: "text",
+                          placeholder: "SubTitulo de la card"
+                        },
+                        domProps: { value: _vm.data.carrusel[1].SubTitle },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.data.carrusel[1],
+                              "SubTitle",
+                              $event.target.value
+                            )
+                          }
                         }
-                        _vm.$set(
-                          _vm.data.carrusel[1],
-                          "SubTitle",
-                          $event.target.value
-                        )
+                      })
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _vm._m(3),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-6" }, [
+                    _c("img", {
+                      staticClass: "img-thumbnail img-center",
+                      attrs: {
+                        src: _vm.imagen2,
+                        width: "90%",
+                        alt: "Card image cap"
                       }
-                    }
-                  })
+                    }),
+                    _vm._v(" "),
+                    _vm._m(4)
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group col-6" }, [
+                    _vm._v(
+                      "\r\n                            Selecciona una imagen en formato PNG de tamaño inferior a 1MB."
+                    ),
+                    _c("br"),
+                    _vm._v(" "),
+                    _c("input", {
+                      attrs: {
+                        type: "file",
+                        name: "fimagen",
+                        accept: "image/gif, image/jpeg, image/png"
+                      },
+                      on: {
+                        change: function($event) {
+                          return _vm.processFile2($event)
+                        }
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-12" }, [
+                    _c("hr"),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-success",
+                        attrs: { id: "btn-save-card02", type: "submit" },
+                        on: {
+                          click: function($event) {
+                            return _vm.editarFormulario2()
+                          }
+                        }
+                      },
+                      [
+                        _vm._v("Guardar "),
+                        _c("font-awesome-icon", {
+                          attrs: { icon: ["fas", "save"] }
+                        })
+                      ],
+                      1
+                    )
+                  ])
                 ])
-              ]),
-              _vm._v(" "),
-              _vm._m(3),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-6" }, [
-                _c("img", {
-                  staticClass: "img-thumbnail img-center",
-                  attrs: {
-                    src: _vm.imagen2,
-                    width: "90%",
-                    alt: "Card image cap"
-                  }
-                }),
-                _vm._v(" "),
-                _vm._m(4)
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "form-group col-6" }, [
-                _vm._v(
-                  "\r\n                            Selecciona una imagen en formato PNG de tamaño inferior a 1MB."
-                ),
-                _c("br"),
-                _vm._v(" "),
-                _c("input", {
-                  attrs: {
-                    type: "file",
-                    name: "fimagen",
-                    accept: "image/gif, image/jpeg, image/png"
-                  },
-                  on: {
-                    change: function($event) {
-                      return _vm.processFile2($event)
-                    }
-                  }
-                })
-              ])
-            ])
+              ]
+            )
           ]
         ),
         _vm._v(" "),
@@ -60563,105 +60681,146 @@ var render = function() {
             }
           },
           [
-            _c("section", { staticClass: "row" }, [
-              _c("div", { staticClass: "col-12" }, [_vm._v("   ")]),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-12 row" }, [
-                _c("div", { staticClass: "col-6" }, [
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.data.carrusel[2].Title,
-                        expression: "data.carrusel[2].Title"
-                      }
-                    ],
-                    staticClass: "form-control mb-2",
-                    attrs: { type: "text", placeholder: "Titulo de la card" },
-                    domProps: { value: _vm.data.carrusel[2].Title },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
+            _c(
+              "form",
+              {
+                attrs: { enctype: "multipart/form-data" },
+                on: {
+                  submit: function($event) {
+                    $event.preventDefault()
+                    return _vm.addProduct3($event)
+                  }
+                }
+              },
+              [
+                _c("section", { staticClass: "row" }, [
+                  _c("div", { staticClass: "col-12" }, [_vm._v("   ")]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-12 row" }, [
+                    _c("div", { staticClass: "col-6" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.data.carrusel[2].Title,
+                            expression: "data.carrusel[2].Title"
+                          }
+                        ],
+                        staticClass: "form-control mb-2",
+                        attrs: {
+                          type: "text",
+                          placeholder: "Titulo de la card"
+                        },
+                        domProps: { value: _vm.data.carrusel[2].Title },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.data.carrusel[2],
+                              "Title",
+                              $event.target.value
+                            )
+                          }
                         }
-                        _vm.$set(
-                          _vm.data.carrusel[2],
-                          "Title",
-                          $event.target.value
-                        )
-                      }
-                    }
-                  })
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-6" }, [
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.data.carrusel[2].SubTitle,
-                        expression: "data.carrusel[2].SubTitle"
-                      }
-                    ],
-                    staticClass: "form-control mb-2",
-                    attrs: {
-                      type: "text",
-                      placeholder: "SubTitulo de la card"
-                    },
-                    domProps: { value: _vm.data.carrusel[2].SubTitle },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-6" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.data.carrusel[2].SubTitle,
+                            expression: "data.carrusel[2].SubTitle"
+                          }
+                        ],
+                        staticClass: "form-control mb-2",
+                        attrs: {
+                          type: "text",
+                          placeholder: "SubTitulo de la card"
+                        },
+                        domProps: { value: _vm.data.carrusel[2].SubTitle },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.data.carrusel[2],
+                              "SubTitle",
+                              $event.target.value
+                            )
+                          }
                         }
-                        _vm.$set(
-                          _vm.data.carrusel[2],
-                          "SubTitle",
-                          $event.target.value
-                        )
+                      })
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _vm._m(5),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-6" }, [
+                    _c("img", {
+                      staticClass: "img-thumbnail img-center",
+                      attrs: {
+                        src: _vm.imagen3,
+                        width: "90%",
+                        alt: "Card image cap"
                       }
-                    }
-                  })
+                    }),
+                    _vm._v(" "),
+                    _vm._m(6)
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group col-6" }, [
+                    _vm._v(
+                      "\r\n                            Selecciona una imagen en formato PNG de tamaño inferior a 1MB."
+                    ),
+                    _c("br"),
+                    _vm._v(" "),
+                    _c("input", {
+                      attrs: {
+                        type: "file",
+                        name: "fimagen",
+                        accept: "image/gif, image/jpeg, image/png"
+                      },
+                      on: {
+                        change: function($event) {
+                          return _vm.processFile3($event)
+                        }
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-12" }, [
+                    _c("hr"),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-success",
+                        attrs: { id: "btn-save-card03", type: "submit" },
+                        on: {
+                          click: function($event) {
+                            return _vm.editarFormulario3()
+                          }
+                        }
+                      },
+                      [
+                        _vm._v("Guardar "),
+                        _c("font-awesome-icon", {
+                          attrs: { icon: ["fas", "save"] }
+                        })
+                      ],
+                      1
+                    )
+                  ])
                 ])
-              ]),
-              _vm._v(" "),
-              _vm._m(5),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-6" }, [
-                _c("img", {
-                  staticClass: "img-thumbnail img-center",
-                  attrs: {
-                    src: _vm.imagen3,
-                    width: "90%",
-                    alt: "Card image cap"
-                  }
-                }),
-                _vm._v(" "),
-                _vm._m(6)
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "form-group col-6" }, [
-                _vm._v(
-                  "\r\n                            Selecciona una imagen en formato PNG de tamaño inferior a 1MB."
-                ),
-                _c("br"),
-                _vm._v(" "),
-                _c("input", {
-                  attrs: {
-                    type: "file",
-                    name: "fimagen",
-                    accept: "image/gif, image/jpeg, image/png"
-                  },
-                  on: {
-                    change: function($event) {
-                      return _vm.processFile3($event)
-                    }
-                  }
-                })
-              ])
-            ])
+              ]
+            )
           ]
         )
       ])
