@@ -183,23 +183,65 @@ export default {
                 this.carrusel.SubTitle1 =  this.data.carrusel[0].SubTitle
         },
         addProduct1(formData){
-
+            var formData = new FormData();
+                formData.append('id',1);
+                formData.append('Title',this.carrusel.Title1);
+                formData.append('SubTitle',this.carrusel.SubTitle1);
+                formData.append('Url',this.carrusel.Imagen1);
+                this.Editar(formData)
         },
         editarFormulario2(){
                 this.carrusel.Title2 = this.data.carrusel[1].Title
                 this.carrusel.SubTitle2 =  this.data.carrusel[1].SubTitle
         },
         addProduct2(formData){
-
+            var formData = new FormData();
+                formData.append('id',2);
+                formData.append('Title',this.carrusel.Title2);
+                formData.append('SubTitle',this.carrusel.SubTitle2);
+                formData.append('Url',this.carrusel.Imagen2);
+                this.Editar(formData)
         },
         editarFormulario3(){
                 this.carrusel.Title3 = this.data.carrusel[2].Title
                 this.carrusel.SubTitle3 =  this.data.carrusel[2].SubTitle
         },
         addProduct3(formData){
-
-        }
-     },
+            var formData = new FormData();
+                formData.append('id',3);
+                formData.append('Title',this.carrusel.Title3);
+                formData.append('SubTitle',this.carrusel.SubTitle3);
+                formData.append('Url',this.carrusel.Imagen3);
+                this.Editar(formData)
+        },
+        Editar(formData){
+                axios.post('/web/update_carrusel', formData)
+                .then(function (response) {
+                    // handle success
+                    // console.log(response);
+                    var msg ='';
+                    if(response.data == '200'){
+                        msg ="Actulización exitosa, codigo: [ "+response.data+" ]";
+                        Alerts.windows('alert-success','success',msg);
+                    }else{
+                        msg ="Proceso parcialmente Exitoso, Problemas en la consulta, codigo: [ "+response.data+" ]";
+                        Alerts.windows('alert-warning','warning',msg);
+                    }
+                    
+                })
+                .catch(function (error) {
+                    // handle error
+                    // console.log(error);
+                    var msg ='';
+                    msg ="Ocurrio algo, Error: [ "+error+" ]";
+                    Alerts.windows('alert-danger','danger',msg);
+                })
+                .then(function () {
+                    // always executed
+                });
+                
+            }//::END
+      },
      computed:{
             imagen1(){                
                 return this.imagenMiniatura1;

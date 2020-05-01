@@ -60245,104 +60245,148 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-        props: {
-                data: {}
-        },
-        data: function data() {
-                return {
-                        dataCarrusel: [],
-                        API_IMG: API_BACKEND_IMG,
-                        imagenMiniatura1: '',
-                        imagenMiniatura2: '',
-                        imagenMiniatura3: '',
-                        carrusel: {
-                                Title1: '',
-                                SubTitle1: '',
-                                Imagen1: '',
-                                Title2: '',
-                                SubTitle2: '',
-                                Imagen2: '',
-                                Title3: '',
-                                SubTitle3: '',
-                                Imagen3: ''
-                        }
+    props: {
+        data: {}
+    },
+    data: function data() {
+        return {
+            dataCarrusel: [],
+            API_IMG: API_BACKEND_IMG,
+            imagenMiniatura1: '',
+            imagenMiniatura2: '',
+            imagenMiniatura3: '',
+            carrusel: {
+                Title1: '',
+                SubTitle1: '',
+                Imagen1: '',
+                Title2: '',
+                SubTitle2: '',
+                Imagen2: '',
+                Title3: '',
+                SubTitle3: '',
+                Imagen3: ''
+            }
 
-                };
-        },
-        mounted: function mounted() {
-                this.dataCarrusel = this.data.carrusel;
-                // console.log(">>"+this.dataCarrusel[0].Url);
-                this.imagenMiniatura1 = this.API_IMG + '/' + this.dataCarrusel[0].Url;
-                this.imagenMiniatura2 = this.API_IMG + '/' + this.dataCarrusel[1].Url;
-                this.imagenMiniatura3 = this.API_IMG + '/' + this.dataCarrusel[2].Url;
-        },
+        };
+    },
+    mounted: function mounted() {
+        this.dataCarrusel = this.data.carrusel;
+        // console.log(">>"+this.dataCarrusel[0].Url);
+        this.imagenMiniatura1 = this.API_IMG + '/' + this.dataCarrusel[0].Url;
+        this.imagenMiniatura2 = this.API_IMG + '/' + this.dataCarrusel[1].Url;
+        this.imagenMiniatura3 = this.API_IMG + '/' + this.dataCarrusel[2].Url;
+    },
 
-        methods: {
-                processFile1: function processFile1(event) {
-                        var file = event.target.files[0];
-                        this.carrusel.Imagen1 = file;
-                        // console.log(file);
-                        this.cargaImagen(file, 1);
-                },
-                processFile2: function processFile2(event) {
-                        var file = event.target.files[0];
-                        this.carrusel.Imagen2 = file;
-                        // console.log(file);
-                        this.cargaImagen(file, 2);
-                },
-                processFile3: function processFile3(event) {
-                        var file = event.target.files[0];
-                        this.carrusel.Imagen3 = file;
-                        // console.log(file);
-                        this.cargaImagen(file, 3);
-                },
-                cargaImagen: function cargaImagen(file, i) {
-                        var _this = this;
-
-                        var reader = new FileReader();
-                        reader.onload = function (e) {
-                                // console.log(e.target.result)
-                                switch (i) {
-                                        case 1:
-                                                _this.imagenMiniatura1 = e.target.result;
-                                                break;
-                                        case 2:
-                                                _this.imagenMiniatura2 = e.target.result;
-                                                break;
-                                        case 3:
-                                                _this.imagenMiniatura3 = e.target.result;
-                                                break;
-                                }
-                        };
-                        reader.readAsDataURL(file);
-                },
-                editarFormulario1: function editarFormulario1() {
-                        this.carrusel.Title1 = this.data.carrusel[0].Title;
-                        this.carrusel.SubTitle1 = this.data.carrusel[0].SubTitle;
-                },
-                addProduct1: function addProduct1(formData) {},
-                editarFormulario2: function editarFormulario2() {
-                        this.carrusel.Title2 = this.data.carrusel[1].Title;
-                        this.carrusel.SubTitle2 = this.data.carrusel[1].SubTitle;
-                },
-                addProduct2: function addProduct2(formData) {},
-                editarFormulario3: function editarFormulario3() {
-                        this.carrusel.Title3 = this.data.carrusel[2].Title;
-                        this.carrusel.SubTitle3 = this.data.carrusel[2].SubTitle;
-                },
-                addProduct3: function addProduct3(formData) {}
+    methods: {
+        processFile1: function processFile1(event) {
+            var file = event.target.files[0];
+            this.carrusel.Imagen1 = file;
+            // console.log(file);
+            this.cargaImagen(file, 1);
         },
-        computed: {
-                imagen1: function imagen1() {
-                        return this.imagenMiniatura1;
-                },
-                imagen2: function imagen2() {
-                        return this.imagenMiniatura2;
-                },
-                imagen3: function imagen3() {
-                        return this.imagenMiniatura3;
+        processFile2: function processFile2(event) {
+            var file = event.target.files[0];
+            this.carrusel.Imagen2 = file;
+            // console.log(file);
+            this.cargaImagen(file, 2);
+        },
+        processFile3: function processFile3(event) {
+            var file = event.target.files[0];
+            this.carrusel.Imagen3 = file;
+            // console.log(file);
+            this.cargaImagen(file, 3);
+        },
+        cargaImagen: function cargaImagen(file, i) {
+            var _this = this;
+
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                // console.log(e.target.result)
+                switch (i) {
+                    case 1:
+                        _this.imagenMiniatura1 = e.target.result;
+                        break;
+                    case 2:
+                        _this.imagenMiniatura2 = e.target.result;
+                        break;
+                    case 3:
+                        _this.imagenMiniatura3 = e.target.result;
+                        break;
                 }
+            };
+            reader.readAsDataURL(file);
+        },
+        editarFormulario1: function editarFormulario1() {
+            this.carrusel.Title1 = this.data.carrusel[0].Title;
+            this.carrusel.SubTitle1 = this.data.carrusel[0].SubTitle;
+        },
+        addProduct1: function addProduct1(formData) {
+            var formData = new FormData();
+            formData.append('id', 1);
+            formData.append('Title', this.carrusel.Title1);
+            formData.append('SubTitle', this.carrusel.SubTitle1);
+            formData.append('Url', this.carrusel.Imagen1);
+            this.Editar(formData);
+        },
+        editarFormulario2: function editarFormulario2() {
+            this.carrusel.Title2 = this.data.carrusel[1].Title;
+            this.carrusel.SubTitle2 = this.data.carrusel[1].SubTitle;
+        },
+        addProduct2: function addProduct2(formData) {
+            var formData = new FormData();
+            formData.append('id', 2);
+            formData.append('Title', this.carrusel.Title2);
+            formData.append('SubTitle', this.carrusel.SubTitle2);
+            formData.append('Url', this.carrusel.Imagen2);
+            this.Editar(formData);
+        },
+        editarFormulario3: function editarFormulario3() {
+            this.carrusel.Title3 = this.data.carrusel[2].Title;
+            this.carrusel.SubTitle3 = this.data.carrusel[2].SubTitle;
+        },
+        addProduct3: function addProduct3(formData) {
+            var formData = new FormData();
+            formData.append('id', 3);
+            formData.append('Title', this.carrusel.Title3);
+            formData.append('SubTitle', this.carrusel.SubTitle3);
+            formData.append('Url', this.carrusel.Imagen3);
+            this.Editar(formData);
+        },
+        Editar: function Editar(formData) {
+            axios.post('/web/update_carrusel', formData).then(function (response) {
+                // handle success
+                // console.log(response);
+                var msg = '';
+                if (response.data == '200') {
+                    msg = "Actulización exitosa, codigo: [ " + response.data + " ]";
+                    Alerts.windows('alert-success', 'success', msg);
+                } else {
+                    msg = "Proceso parcialmente Exitoso, Problemas en la consulta, codigo: [ " + response.data + " ]";
+                    Alerts.windows('alert-warning', 'warning', msg);
+                }
+            }).catch(function (error) {
+                // handle error
+                // console.log(error);
+                var msg = '';
+                msg = "Ocurrio algo, Error: [ " + error + " ]";
+                Alerts.windows('alert-danger', 'danger', msg);
+            }).then(function () {
+                // always executed
+            });
+        } //::END
+
+    },
+    computed: {
+        imagen1: function imagen1() {
+            return this.imagenMiniatura1;
+        },
+        imagen2: function imagen2() {
+            return this.imagenMiniatura2;
+        },
+        imagen3: function imagen3() {
+            return this.imagenMiniatura3;
         }
+    }
 });
 
 /***/ }),

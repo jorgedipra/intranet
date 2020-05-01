@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
 use anlutro\cURL\cURL;
 use App\Profile;
+use App\carrusel;
+
 
 class webController extends Controller
 {
@@ -67,4 +69,26 @@ class webController extends Controller
         return  $resul;
     }//END=>update_presentation
 
+    public function update_carrusel(Request $request){
+        $carrusel = carrusel::find($request->id);
+
+        $carrusel->Title = $request->Title;
+        $carrusel->SubTitle = $request->SubTitle;
+
+        if($request->Url!=null or $request->Url !=''){
+            $request->file('Url');
+            $path =Storage::disk('public')->put('image',$request->file('Url'));
+            $carrusel->Url = $path;
+        }
+
+
+        try {
+            $carrusel->save();
+            $resul = "200";  
+        } catch (\Exception $e) {
+            $resul = '204';
+        }
+
+        return  $resul;
+    }//END=>update_carrusel
 }//::END class
