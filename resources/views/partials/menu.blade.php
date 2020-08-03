@@ -18,11 +18,11 @@
             </a>
             
         </li>
-        <li  @if(\Request::route()->getName()=='')  id="IntranetLisat" @else class="has-subnav" @endif>
-            <a href="#">
+        <li  @if(\Request::route()->getName()=='PageWeb')  id="IntranetLisat" @else class="has-subnav" @endif>
+            <a href="{{ url('/PageWeb') }}">
                 <i class="fa fa-laptop fa-2x"></i>
                 <span class="nav-text">
-                    Stars Components
+                    PageWeb
                 </span>
             </a>
             

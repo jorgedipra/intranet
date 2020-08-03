@@ -17,6 +17,8 @@ Vue.component('cardpresent-components', require('./components/web/CardPresentCom
 Vue.component('cardfrase-components', require('./components/web/CardFraseComponent.vue'));
 Vue.component('cardcarrucel-components', require('./components/web/CardCarrucelComponent.vue'));
 
+Vue.component('tablepage-components', require('./components/pageWeb/TablePageComponent.vue'));
+
 const app = new Vue({
     el: '#app'
 });
