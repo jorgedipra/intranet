@@ -65,16 +65,86 @@
               </div>
               <div class="modal-body">
                 <form>
-                  <div class="form-group row">
-                    <label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>
-                    <div class="col-sm-10">
-                      <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
+                  <article class="form-group row">
+                    <label for="inputEmail3" class="col-sm-2 col-form-label tg-right">Nombre</label>
+                    <div class="col-sm-3">
+                      <input type="text" class="form-control" id="inputEmail3" placeholder="Nombre de la pagina">
                     </div>
-                  </div>
+                    <label for="inputEmail3" class="col-sm-1 col-form-label tg-right">	Roll</label>
+                    <div class="col-sm-3">
+                      <select class="custom-select form-control" id="inputGroupSelect01">
+                        <option selected>Roll...</option>
+                        <option value="1">Desarrollo</option>
+                        <option value="2">Analista Master</option>
+                        <option value="3">Consultor</option>
+                      </select>
+                    </div>
+                    <div class="col-sm-3">
+                      <div class="form-check">
+                        <input class="form-check-input col-sm-1 tg-success" type="radio" name="gridRadios" id="gridRadios1" value="option1" checked>
+                        <label class="form-check-label col-sm-6 tg-success" for="gridRadios1">
+                          Activo
+                        </label>
+                        <div class="col-sm-4"></div><br>
+                        <input class="form-check-input col-sm-1 tg-error" type="radio" name="gridRadios" id="gridRadios2" value="option2">
+                        <label class="form-check-label col-sm-6 tg-error" for="gridRadios2">
+                          Offline
+                        </label>
+                      </div>
+                    </div>
+                  </article>
+                  <article class="form-group row">
+                    <label for="inputEmail3" class="col-sm-2 col-form-label tg-right">Url</label>
+                    <div class="col-sm-3">
+                      <input type="text" class="form-control" id="inputEmail3" placeholder="Url de la pagina">
+                    </div>
+                    <label for="inputEmail3" class="col-sm-1 col-form-label tg-right">Url2</label>
+                    <div class="col-sm-3">
+                      <input type="text" class="form-control" id="inputEmail3" placeholder="Url alternativo">
+                    </div>
+                    <div class="col-sm-3">
+                      <div class="form-check">
+                        <input class="form-check-input col-sm-1 tg-edit" type="radio" name="gridRadios2" id="gridRadios3" value="option1" checked>
+                        <label class="form-check-label col-sm-7 tg-edit" for="gridRadios3">
+                          privado
+                        </label>
+                        <div class="col-sm-3"></div><br>
+                        <input class="form-check-input col-sm-1 tg-success" type="radio" name="gridRadios2" id="gridRadios4" value="option2">
+                        <label class="form-check-label col-sm-6 tg-success" for="gridRadios4">
+                          publico
+                        </label>
+                      </div>
+                    </div>
+                  </article>
+                  <article class="form-group row">
+                    <label for="inputEmail3" class="col-sm-2 col-form-label tg-right">Color</label>
+                    <div class="col-sm-2">
+                      <input type="color" class="form-control" id="inputEmail3" placeholder="Url de la pagina">
+                    </div>
+                    <label for="inputEmail3" class="col-sm-2 col-form-label tg-right">Fondo</label>
+                    <div class="col-sm-2">
+                      <input type="color" class="form-control" id="inputEmail3" placeholder="Url alternativo">
+                    </div>
+                    <div class="col-sm-4"></div>
+                  </article>
+                  <article class="form-group row">
+                    <label for="inputEmail3" class="col-sm-4 col-form-label tg-right">Logo</label>
+                      <input type="file" class="form-control col-sm-6" id="inputEmail3" placeholder="Url de la pagina">
+                      <div class="col-sm-4"></div>
+                      <div class="col-sm-4 td-center">
+                        <img src="https://www.dosprofesenapuros.com/wp-content/uploads/2015/09/hoja-rota1-854x1024.png" width="100" alt="">
+                      </div>
+                  </article>
+                  <article class="form-group row">
+                      <div class="col-sm-1"></div>
+                      <label class="form-check-input col-sm-11"  for="exampleFormControlTextarea1">Nota</label>
+                       <div class="col-sm-1"></div>
+                      <textarea class="form-control col-sm-10" id="exampleFormControlTextarea1" rows="3"></textarea>
+                  </article>
                 </form>
               </div>
               <div class="modal-footer">
-                <button type="button" class="btn btn-primary">Save changes</button>
+                <button type="button" class="btn btn-success">Save changes</button>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal" v-on:click="cerrar()">Close</button>
               </div>
             </div>
@@ -227,5 +297,11 @@
   }
   .modal{
     background:#0000006b;
+  }
+  .tg-right{
+    text-align:right;
+  }
+  .modal-dialog.modal-lg{
+    margin-top: 50px;
   }
 </style>
