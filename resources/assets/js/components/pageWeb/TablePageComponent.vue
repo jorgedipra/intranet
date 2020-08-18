@@ -58,91 +58,123 @@
           <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title">Modal title</h5>
+                <h5 class="modal-title">Pagina</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"  v-on:click="cerrar()">
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
               <div class="modal-body">
-                <form>
-                  <article class="form-group row">
-                    <label for="inputEmail3" class="col-sm-2 col-form-label tg-right">Nombre</label>
-                    <div class="col-sm-3">
-                      <input type="text" class="form-control" id="inputEmail3" placeholder="Nombre de la pagina">
-                    </div>
-                    <label for="inputEmail3" class="col-sm-1 col-form-label tg-right">	Roll</label>
-                    <div class="col-sm-3">
-                      <select class="custom-select form-control" id="inputGroupSelect01">
-                        <option selected>Roll...</option>
-                        <option value="1">Desarrollo</option>
-                        <option value="2">Analista Master</option>
-                        <option value="3">Consultor</option>
-                      </select>
-                    </div>
-                    <div class="col-sm-3">
-                      <div class="form-check">
-                        <input class="form-check-input col-sm-1 tg-success" type="radio" name="gridRadios" id="gridRadios1" value="option1" checked>
-                        <label class="form-check-label col-sm-6 tg-success" for="gridRadios1">
-                          Activo
-                        </label>
-                        <div class="col-sm-4"></div><br>
-                        <input class="form-check-input col-sm-1 tg-error" type="radio" name="gridRadios" id="gridRadios2" value="option2">
-                        <label class="form-check-label col-sm-6 tg-error" for="gridRadios2">
-                          Offline
-                        </label>
-                      </div>
-                    </div>
-                  </article>
-                  <article class="form-group row">
-                    <label for="inputEmail3" class="col-sm-2 col-form-label tg-right">Url</label>
-                    <div class="col-sm-3">
-                      <input type="text" class="form-control" id="inputEmail3" placeholder="Url de la pagina">
-                    </div>
-                    <label for="inputEmail3" class="col-sm-1 col-form-label tg-right">Url2</label>
-                    <div class="col-sm-3">
-                      <input type="text" class="form-control" id="inputEmail3" placeholder="Url alternativo">
-                    </div>
-                    <div class="col-sm-3">
-                      <div class="form-check">
-                        <input class="form-check-input col-sm-1 tg-edit" type="radio" name="gridRadios2" id="gridRadios3" value="option1" checked>
-                        <label class="form-check-label col-sm-7 tg-edit" for="gridRadios3">
-                          privado
-                        </label>
-                        <div class="col-sm-3"></div><br>
-                        <input class="form-check-input col-sm-1 tg-success" type="radio" name="gridRadios2" id="gridRadios4" value="option2">
-                        <label class="form-check-label col-sm-6 tg-success" for="gridRadios4">
-                          publico
-                        </label>
-                      </div>
-                    </div>
-                  </article>
-                  <article class="form-group row">
-                    <label for="inputEmail3" class="col-sm-2 col-form-label tg-right">Color</label>
-                    <div class="col-sm-2">
-                      <input type="color" class="form-control" id="inputEmail3" placeholder="Url de la pagina">
-                    </div>
-                    <label for="inputEmail3" class="col-sm-2 col-form-label tg-right">Fondo</label>
-                    <div class="col-sm-2">
-                      <input type="color" class="form-control" id="inputEmail3" placeholder="Url alternativo">
-                    </div>
-                    <div class="col-sm-4"></div>
-                  </article>
-                  <article class="form-group row">
-                    <label for="inputEmail3" class="col-sm-4 col-form-label tg-right">Logo</label>
-                      <input type="file" class="form-control col-sm-6" id="inputEmail3" placeholder="Url de la pagina">
-                      <div class="col-sm-4"></div>
-                      <div class="col-sm-4 td-center">
-                        <img src="https://www.dosprofesenapuros.com/wp-content/uploads/2015/09/hoja-rota1-854x1024.png" width="100" alt="">
-                      </div>
-                  </article>
-                  <article class="form-group row">
-                      <div class="col-sm-1"></div>
-                      <label class="form-check-input col-sm-11"  for="exampleFormControlTextarea1">Nota</label>
-                       <div class="col-sm-1"></div>
-                      <textarea class="form-control col-sm-10" id="exampleFormControlTextarea1" rows="3"></textarea>
-                  </article>
-                </form>
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item">
+                      <a class="nav-link tg-edit active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">General</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link tg-edit" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Diseño</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link tg-edit" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Descripción</a>
+                    </li>
+                  </ul>
+                  <div class="tab-content" id="myTabContent">
+                    <section class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab"> 
+                      <br>
+                      <form>
+                        <article class="form-group row">
+                          <label for="inputEmail3" class="col-sm-2 col-form-label tg-right">Nombre</label>
+                          <div class="col-sm-3">
+                            <input type="text" class="form-control" id="inputEmail3" placeholder="Nombre de la pagina">
+                          </div>
+                          <label for="inputEmail3" class="col-sm-1 col-form-label tg-right">	Roll</label>
+                          <div class="col-sm-3">
+                            <select class="custom-select form-control" id="inputGroupSelect01">
+                              <option selected>Roll...</option>
+                              <option value="1">Desarrollo</option>
+                              <option value="2">Analista Master</option>
+                              <option value="3">Consultor</option>
+                            </select>
+                          </div>
+                          <div class="col-sm-3">
+                            <div class="form-check">
+                              <input class="form-check-input col-sm-1 tg-success" type="radio" name="gridRadios" id="gridRadios1" value="option1" checked>
+                              <label class="form-check-label col-sm-6 tg-success" for="gridRadios1">
+                                Activo
+                              </label>
+                              <div class="col-sm-4"></div><br>
+                              <input class="form-check-input col-sm-1 tg-error" type="radio" name="gridRadios" id="gridRadios2" value="option2">
+                              <label class="form-check-label col-sm-6 tg-error" for="gridRadios2">
+                                Offline
+                              </label>
+                            </div>
+                          </div>
+                        </article>
+                        <br>  
+                        <article class="form-group row">
+                          <label for="inputEmail3" class="col-sm-2 col-form-label tg-right">Url</label>
+                          <div class="col-sm-3">
+                            <input type="text" class="form-control" id="inputEmail3" placeholder="Url de la pagina">
+                          </div>
+                          <label for="inputEmail3" class="col-sm-1 col-form-label tg-right">Url2</label>
+                          <div class="col-sm-3">
+                            <input type="text" class="form-control" id="inputEmail3" placeholder="Url alternativo">
+                          </div>
+                          <div class="col-sm-3">
+                            <div class="form-check">
+                              <input class="form-check-input col-sm-1 tg-edit" type="radio" name="gridRadios2" id="gridRadios3" value="option1" checked>
+                              <label class="form-check-label col-sm-7 tg-edit" for="gridRadios3">
+                                privado
+                              </label>
+                              <div class="col-sm-3"></div><br>
+                              <input class="form-check-input col-sm-1 tg-success" type="radio" name="gridRadios2" id="gridRadios4" value="option2">
+                              <label class="form-check-label col-sm-6 tg-success" for="gridRadios4">
+                                publico
+                              </label>
+                            </div>
+                          </div>
+                        </article>
+                      </form>
+                      <br>
+                    </section>
+                    <section class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                      <br>  
+                      <form>
+                          <article class="form-group row">
+                            <div class="col-sm-1"></div>
+                            <label for="inputEmail3" class="col-sm-2 col-form-label tg-right">Color</label>
+                            <div class="col-sm-2">
+                              <input type="color" class="form-control" id="inputEmail3" value="#000">
+                            </div>
+                            <label for="inputEmail3" class="col-sm-2 col-form-label tg-right">Fondo</label>
+                            <div class="col-sm-2">
+                              <input type="color" class="form-control" id="inputEmail3" value="#000">
+                            </div>
+                            <div class="col-sm-4"></div>
+                          </article>
+                          <article class="form-group row">
+                            <div class="col-sm-1"></div>
+                            <label for="inputEmail3" class="col-sm-2 col-form-label tg-right">Logo</label>
+                              <input type="file" class="form-control col-sm-6" id="inputEmail3" placeholder="Url de la pagina">
+                              <div class="col-sm-3"></div>
+                              <div class="col-sm-2"></div>
+                              <div class="col-sm-8 td-center">
+                                <img src="https://www.dosprofesenapuros.com/wp-content/uploads/2015/09/hoja-rota1-854x1024.png" width="200" alt="">
+                              </div>
+                          </article>
+                      </form>
+                    </section>
+                    <section class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+                      <br>
+                      <form>
+                          <article class="form-group row">
+                              <div class="col-sm-1"></div>
+                              <label class="form-check-input col-sm-11"  for="exampleFormControlTextarea1">Nota</label>
+                              <div class="col-sm-1"></div>
+                              <textarea class="form-control col-sm-10" id="exampleFormControlTextarea1" rows="10"></textarea>
+                          </article>
+                      </form>
+                    </section>
+                  </div>
               </div>
+
               <div class="modal-footer">
                 <button type="button" class="btn btn-success">Save changes</button>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal" v-on:click="cerrar()">Close</button>
@@ -170,6 +202,7 @@
  methods: {
       modal:function(Fecha){
           $(".modal").show();
+          $("#home-tab").click();
       },
       cerrar:function(){
           $(".modal").hide();
@@ -225,7 +258,7 @@
         const tec = $(id+">.bordeCj>.lengPlc>.lengPlcaja").html();
         
         $("#popUp").show();
-
+        
         $("#title").html(titulo);
         $("#img").attr('src',fondo);
          $("#logo").attr('src',logo);
