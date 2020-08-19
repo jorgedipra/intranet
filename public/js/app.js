@@ -61291,14 +61291,25 @@ window.$ = $;
     return {
       dataPaginas: [],
       dataTecnologias: [],
-      dataPag_Tec: []
+      dataPag_Tec: [],
+      dataPag_edit: {
+        id: "",
+        Name: ""
+      }
     };
   },
 
   methods: {
-    modal: function modal(Fecha) {
+    modal: function modal(id) {
       $(".modal").show();
       $("#home-tab").click();
+      this.dataPag_edit.id = id;
+
+      for (var i in this.dataPaginas) {
+        if (this.dataPaginas[i].Id == id) {
+          this.dataPag_edit.Name = this.dataPaginas[i].Name;
+        }
+      }
     },
     cerrar: function cerrar() {
       $(".modal").hide();
@@ -61500,7 +61511,7 @@ var render = function() {
                   staticClass: "tg-editlink",
                   on: {
                     click: function($event) {
-                      return _vm.modal("1")
+                      return _vm.modal(item.Id, "Edit")
                     }
                   }
                 },
@@ -61549,7 +61560,98 @@ var render = function() {
                 )
               ]),
               _vm._v(" "),
-              _vm._m(1),
+              _c("div", { staticClass: "modal-body" }, [
+                _vm._m(1),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "tab-content", attrs: { id: "myTabContent" } },
+                  [
+                    _c(
+                      "section",
+                      {
+                        staticClass: "tab-pane fade show active",
+                        attrs: {
+                          id: "home",
+                          role: "tabpanel",
+                          "aria-labelledby": "home-tab"
+                        }
+                      },
+                      [
+                        _c("br"),
+                        _vm._v(" "),
+                        _c("form", [
+                          _c("article", { staticClass: "form-group row" }, [
+                            _c(
+                              "label",
+                              {
+                                staticClass: "col-sm-2 col-form-label tg-right",
+                                attrs: { for: "td-inputName" }
+                              },
+                              [_vm._v("Nombre")]
+                            ),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "col-sm-3" }, [
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.dataPag_edit.Name,
+                                    expression: "dataPag_edit.Name"
+                                  }
+                                ],
+                                staticClass: "form-control",
+                                attrs: {
+                                  type: "text",
+                                  id: "td-inputName",
+                                  placeholder: "Nombre de la pagina"
+                                },
+                                domProps: { value: _vm.dataPag_edit.Name },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      _vm.dataPag_edit,
+                                      "Name",
+                                      $event.target.value
+                                    )
+                                  }
+                                }
+                              })
+                            ]),
+                            _vm._v(" "),
+                            _c(
+                              "label",
+                              {
+                                staticClass: "col-sm-1 col-form-label tg-right",
+                                attrs: { for: "inputEmail3" }
+                              },
+                              [_vm._v("\tRoll")]
+                            ),
+                            _vm._v(" "),
+                            _vm._m(2),
+                            _vm._v(" "),
+                            _vm._m(3)
+                          ]),
+                          _vm._v(" "),
+                          _c("br"),
+                          _vm._v(" "),
+                          _vm._m(4)
+                        ]),
+                        _vm._v(" "),
+                        _c("br")
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _vm._m(5),
+                    _vm._v(" "),
+                    _vm._m(6)
+                  ]
+                )
+              ]),
               _vm._v(" "),
               _c("div", { staticClass: "modal-footer" }, [
                 _c(
@@ -61612,430 +61714,383 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-body" }, [
+    return _c(
+      "ul",
+      { staticClass: "nav nav-tabs", attrs: { id: "myTab", role: "tablist" } },
+      [
+        _c("li", { staticClass: "nav-item" }, [
+          _c(
+            "a",
+            {
+              staticClass: "nav-link tg-edit active",
+              attrs: {
+                id: "home-tab",
+                "data-toggle": "tab",
+                href: "#home",
+                role: "tab",
+                "aria-controls": "home",
+                "aria-selected": "true"
+              }
+            },
+            [_vm._v("General")]
+          )
+        ]),
+        _vm._v(" "),
+        _c("li", { staticClass: "nav-item" }, [
+          _c(
+            "a",
+            {
+              staticClass: "nav-link tg-edit",
+              attrs: {
+                id: "profile-tab",
+                "data-toggle": "tab",
+                href: "#profile",
+                role: "tab",
+                "aria-controls": "profile",
+                "aria-selected": "false"
+              }
+            },
+            [_vm._v("Diseño")]
+          )
+        ]),
+        _vm._v(" "),
+        _c("li", { staticClass: "nav-item" }, [
+          _c(
+            "a",
+            {
+              staticClass: "nav-link tg-edit",
+              attrs: {
+                id: "contact-tab",
+                "data-toggle": "tab",
+                href: "#contact",
+                role: "tab",
+                "aria-controls": "contact",
+                "aria-selected": "false"
+              }
+            },
+            [_vm._v("Descripción")]
+          )
+        ])
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-sm-3" }, [
       _c(
-        "ul",
+        "select",
         {
-          staticClass: "nav nav-tabs",
-          attrs: { id: "myTab", role: "tablist" }
+          staticClass: "custom-select form-control",
+          attrs: { id: "inputGroupSelect01" }
         },
         [
-          _c("li", { staticClass: "nav-item" }, [
-            _c(
-              "a",
-              {
-                staticClass: "nav-link tg-edit active",
-                attrs: {
-                  id: "home-tab",
-                  "data-toggle": "tab",
-                  href: "#home",
-                  role: "tab",
-                  "aria-controls": "home",
-                  "aria-selected": "true"
-                }
-              },
-              [_vm._v("General")]
-            )
-          ]),
+          _c("option", { attrs: { selected: "" } }, [_vm._v("Roll...")]),
           _vm._v(" "),
-          _c("li", { staticClass: "nav-item" }, [
-            _c(
-              "a",
-              {
-                staticClass: "nav-link tg-edit",
-                attrs: {
-                  id: "profile-tab",
-                  "data-toggle": "tab",
-                  href: "#profile",
-                  role: "tab",
-                  "aria-controls": "profile",
-                  "aria-selected": "false"
-                }
-              },
-              [_vm._v("Diseño")]
-            )
-          ]),
+          _c("option", { attrs: { value: "1" } }, [_vm._v("Desarrollo")]),
           _vm._v(" "),
-          _c("li", { staticClass: "nav-item" }, [
-            _c(
-              "a",
-              {
-                staticClass: "nav-link tg-edit",
-                attrs: {
-                  id: "contact-tab",
-                  "data-toggle": "tab",
-                  href: "#contact",
-                  role: "tab",
-                  "aria-controls": "contact",
-                  "aria-selected": "false"
-                }
-              },
-              [_vm._v("Descripción")]
-            )
-          ])
+          _c("option", { attrs: { value: "2" } }, [_vm._v("Analista Master")]),
+          _vm._v(" "),
+          _c("option", { attrs: { value: "3" } }, [_vm._v("Consultor")])
         ]
-      ),
-      _vm._v(" "),
-      _c("div", { staticClass: "tab-content", attrs: { id: "myTabContent" } }, [
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-sm-3" }, [
+      _c("div", { staticClass: "form-check" }, [
+        _c("input", {
+          staticClass: "form-check-input col-sm-1 tg-success",
+          attrs: {
+            type: "radio",
+            name: "gridRadios",
+            id: "gridRadios1",
+            value: "option1",
+            checked: ""
+          }
+        }),
+        _vm._v(" "),
         _c(
-          "section",
+          "label",
           {
-            staticClass: "tab-pane fade show active",
-            attrs: {
-              id: "home",
-              role: "tabpanel",
-              "aria-labelledby": "home-tab"
-            }
+            staticClass: "form-check-label col-sm-6 tg-success",
+            attrs: { for: "gridRadios1" }
           },
           [
-            _c("br"),
-            _vm._v(" "),
-            _c("form", [
-              _c("article", { staticClass: "form-group row" }, [
-                _c(
-                  "label",
-                  {
-                    staticClass: "col-sm-2 col-form-label tg-right",
-                    attrs: { for: "inputEmail3" }
-                  },
-                  [_vm._v("Nombre")]
-                ),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-sm-3" }, [
-                  _c("input", {
-                    staticClass: "form-control",
-                    attrs: {
-                      type: "text",
-                      id: "inputEmail3",
-                      placeholder: "Nombre de la pagina"
-                    }
-                  })
-                ]),
-                _vm._v(" "),
-                _c(
-                  "label",
-                  {
-                    staticClass: "col-sm-1 col-form-label tg-right",
-                    attrs: { for: "inputEmail3" }
-                  },
-                  [_vm._v("\tRoll")]
-                ),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-sm-3" }, [
-                  _c(
-                    "select",
-                    {
-                      staticClass: "custom-select form-control",
-                      attrs: { id: "inputGroupSelect01" }
-                    },
-                    [
-                      _c("option", { attrs: { selected: "" } }, [
-                        _vm._v("Roll...")
-                      ]),
-                      _vm._v(" "),
-                      _c("option", { attrs: { value: "1" } }, [
-                        _vm._v("Desarrollo")
-                      ]),
-                      _vm._v(" "),
-                      _c("option", { attrs: { value: "2" } }, [
-                        _vm._v("Analista Master")
-                      ]),
-                      _vm._v(" "),
-                      _c("option", { attrs: { value: "3" } }, [
-                        _vm._v("Consultor")
-                      ])
-                    ]
-                  )
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-sm-3" }, [
-                  _c("div", { staticClass: "form-check" }, [
-                    _c("input", {
-                      staticClass: "form-check-input col-sm-1 tg-success",
-                      attrs: {
-                        type: "radio",
-                        name: "gridRadios",
-                        id: "gridRadios1",
-                        value: "option1",
-                        checked: ""
-                      }
-                    }),
-                    _vm._v(" "),
-                    _c(
-                      "label",
-                      {
-                        staticClass: "form-check-label col-sm-6 tg-success",
-                        attrs: { for: "gridRadios1" }
-                      },
-                      [
-                        _vm._v(
-                          "\n                            Activo\n                          "
-                        )
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "col-sm-4" }),
-                    _c("br"),
-                    _vm._v(" "),
-                    _c("input", {
-                      staticClass: "form-check-input col-sm-1 tg-error",
-                      attrs: {
-                        type: "radio",
-                        name: "gridRadios",
-                        id: "gridRadios2",
-                        value: "option2"
-                      }
-                    }),
-                    _vm._v(" "),
-                    _c(
-                      "label",
-                      {
-                        staticClass: "form-check-label col-sm-6 tg-error",
-                        attrs: { for: "gridRadios2" }
-                      },
-                      [
-                        _vm._v(
-                          "\n                            Offline\n                          "
-                        )
-                      ]
-                    )
-                  ])
-                ])
-              ]),
-              _vm._v(" "),
-              _c("br"),
-              _vm._v(" "),
-              _c("article", { staticClass: "form-group row" }, [
-                _c(
-                  "label",
-                  {
-                    staticClass: "col-sm-2 col-form-label tg-right",
-                    attrs: { for: "inputEmail3" }
-                  },
-                  [_vm._v("Url")]
-                ),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-sm-3" }, [
-                  _c("input", {
-                    staticClass: "form-control",
-                    attrs: {
-                      type: "text",
-                      id: "inputEmail3",
-                      placeholder: "Url de la pagina"
-                    }
-                  })
-                ]),
-                _vm._v(" "),
-                _c(
-                  "label",
-                  {
-                    staticClass: "col-sm-1 col-form-label tg-right",
-                    attrs: { for: "inputEmail3" }
-                  },
-                  [_vm._v("Url2")]
-                ),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-sm-3" }, [
-                  _c("input", {
-                    staticClass: "form-control",
-                    attrs: {
-                      type: "text",
-                      id: "inputEmail3",
-                      placeholder: "Url alternativo"
-                    }
-                  })
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-sm-3" }, [
-                  _c("div", { staticClass: "form-check" }, [
-                    _c("input", {
-                      staticClass: "form-check-input col-sm-1 tg-edit",
-                      attrs: {
-                        type: "radio",
-                        name: "gridRadios2",
-                        id: "gridRadios3",
-                        value: "option1",
-                        checked: ""
-                      }
-                    }),
-                    _vm._v(" "),
-                    _c(
-                      "label",
-                      {
-                        staticClass: "form-check-label col-sm-7 tg-edit",
-                        attrs: { for: "gridRadios3" }
-                      },
-                      [
-                        _vm._v(
-                          "\n                            privado\n                          "
-                        )
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "col-sm-3" }),
-                    _c("br"),
-                    _vm._v(" "),
-                    _c("input", {
-                      staticClass: "form-check-input col-sm-1 tg-success",
-                      attrs: {
-                        type: "radio",
-                        name: "gridRadios2",
-                        id: "gridRadios4",
-                        value: "option2"
-                      }
-                    }),
-                    _vm._v(" "),
-                    _c(
-                      "label",
-                      {
-                        staticClass: "form-check-label col-sm-6 tg-success",
-                        attrs: { for: "gridRadios4" }
-                      },
-                      [
-                        _vm._v(
-                          "\n                            publico\n                          "
-                        )
-                      ]
-                    )
-                  ])
-                ])
-              ])
-            ]),
-            _vm._v(" "),
-            _c("br")
+            _vm._v(
+              "\n                            Activo\n                          "
+            )
           ]
         ),
         _vm._v(" "),
-        _c(
-          "section",
-          {
-            staticClass: "tab-pane fade",
-            attrs: {
-              id: "profile",
-              role: "tabpanel",
-              "aria-labelledby": "profile-tab"
-            }
-          },
-          [
-            _c("br"),
-            _vm._v(" "),
-            _c("form", [
-              _c("article", { staticClass: "form-group row" }, [
-                _c("div", { staticClass: "col-sm-1" }),
-                _vm._v(" "),
-                _c(
-                  "label",
-                  {
-                    staticClass: "col-sm-2 col-form-label tg-right",
-                    attrs: { for: "inputEmail3" }
-                  },
-                  [_vm._v("Color")]
-                ),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-sm-2" }, [
-                  _c("input", {
-                    staticClass: "form-control",
-                    attrs: { type: "color", id: "inputEmail3", value: "#000" }
-                  })
-                ]),
-                _vm._v(" "),
-                _c(
-                  "label",
-                  {
-                    staticClass: "col-sm-2 col-form-label tg-right",
-                    attrs: { for: "inputEmail3" }
-                  },
-                  [_vm._v("Fondo")]
-                ),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-sm-2" }, [
-                  _c("input", {
-                    staticClass: "form-control",
-                    attrs: { type: "color", id: "inputEmail3", value: "#000" }
-                  })
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-sm-4" })
-              ]),
-              _vm._v(" "),
-              _c("article", { staticClass: "form-group row" }, [
-                _c("div", { staticClass: "col-sm-1" }),
-                _vm._v(" "),
-                _c(
-                  "label",
-                  {
-                    staticClass: "col-sm-2 col-form-label tg-right",
-                    attrs: { for: "inputEmail3" }
-                  },
-                  [_vm._v("Logo")]
-                ),
-                _vm._v(" "),
-                _c("input", {
-                  staticClass: "form-control col-sm-6",
-                  attrs: {
-                    type: "file",
-                    id: "inputEmail3",
-                    placeholder: "Url de la pagina"
-                  }
-                }),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-sm-3" }),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-sm-2" }),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-sm-8 td-center" }, [
-                  _c("img", {
-                    attrs: {
-                      src:
-                        "https://www.dosprofesenapuros.com/wp-content/uploads/2015/09/hoja-rota1-854x1024.png",
-                      width: "200",
-                      alt: ""
-                    }
-                  })
-                ])
-              ])
-            ])
-          ]
-        ),
+        _c("div", { staticClass: "col-sm-4" }),
+        _c("br"),
+        _vm._v(" "),
+        _c("input", {
+          staticClass: "form-check-input col-sm-1 tg-error",
+          attrs: {
+            type: "radio",
+            name: "gridRadios",
+            id: "gridRadios2",
+            value: "option2"
+          }
+        }),
         _vm._v(" "),
         _c(
-          "section",
+          "label",
           {
-            staticClass: "tab-pane fade",
-            attrs: {
-              id: "contact",
-              role: "tabpanel",
-              "aria-labelledby": "contact-tab"
-            }
+            staticClass: "form-check-label col-sm-6 tg-error",
+            attrs: { for: "gridRadios2" }
           },
           [
-            _c("br"),
-            _vm._v(" "),
-            _c("form", [
-              _c("article", { staticClass: "form-group row" }, [
-                _c("div", { staticClass: "col-sm-1" }),
-                _vm._v(" "),
-                _c(
-                  "label",
-                  {
-                    staticClass: "form-check-input col-sm-11",
-                    attrs: { for: "exampleFormControlTextarea1" }
-                  },
-                  [_vm._v("Nota")]
-                ),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-sm-1" }),
-                _vm._v(" "),
-                _c("textarea", {
-                  staticClass: "form-control col-sm-10",
-                  attrs: { id: "exampleFormControlTextarea1", rows: "10" }
-                })
-              ])
-            ])
+            _vm._v(
+              "\n                            Offline\n                          "
+            )
           ]
         )
       ])
     ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("article", { staticClass: "form-group row" }, [
+      _c(
+        "label",
+        {
+          staticClass: "col-sm-2 col-form-label tg-right",
+          attrs: { for: "inputEmail3" }
+        },
+        [_vm._v("Url")]
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-sm-3" }, [
+        _c("input", {
+          staticClass: "form-control",
+          attrs: {
+            type: "text",
+            id: "inputEmail3",
+            placeholder: "Url de la pagina"
+          }
+        })
+      ]),
+      _vm._v(" "),
+      _c(
+        "label",
+        {
+          staticClass: "col-sm-1 col-form-label tg-right",
+          attrs: { for: "inputEmail3" }
+        },
+        [_vm._v("Url2")]
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-sm-3" }, [
+        _c("input", {
+          staticClass: "form-control",
+          attrs: {
+            type: "text",
+            id: "inputEmail3",
+            placeholder: "Url alternativo"
+          }
+        })
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-sm-3" }, [
+        _c("div", { staticClass: "form-check" }, [
+          _c("input", {
+            staticClass: "form-check-input col-sm-1 tg-edit",
+            attrs: {
+              type: "radio",
+              name: "gridRadios2",
+              id: "gridRadios3",
+              value: "option1",
+              checked: ""
+            }
+          }),
+          _vm._v(" "),
+          _c(
+            "label",
+            {
+              staticClass: "form-check-label col-sm-7 tg-edit",
+              attrs: { for: "gridRadios3" }
+            },
+            [
+              _vm._v(
+                "\n                            privado\n                          "
+              )
+            ]
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-sm-3" }),
+          _c("br"),
+          _vm._v(" "),
+          _c("input", {
+            staticClass: "form-check-input col-sm-1 tg-success",
+            attrs: {
+              type: "radio",
+              name: "gridRadios2",
+              id: "gridRadios4",
+              value: "option2"
+            }
+          }),
+          _vm._v(" "),
+          _c(
+            "label",
+            {
+              staticClass: "form-check-label col-sm-6 tg-success",
+              attrs: { for: "gridRadios4" }
+            },
+            [
+              _vm._v(
+                "\n                            publico\n                          "
+              )
+            ]
+          )
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "section",
+      {
+        staticClass: "tab-pane fade",
+        attrs: {
+          id: "profile",
+          role: "tabpanel",
+          "aria-labelledby": "profile-tab"
+        }
+      },
+      [
+        _c("br"),
+        _vm._v(" "),
+        _c("form", [
+          _c("article", { staticClass: "form-group row" }, [
+            _c("div", { staticClass: "col-sm-1" }),
+            _vm._v(" "),
+            _c(
+              "label",
+              {
+                staticClass: "col-sm-2 col-form-label tg-right",
+                attrs: { for: "inputEmail3" }
+              },
+              [_vm._v("Color")]
+            ),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-sm-2" }, [
+              _c("input", {
+                staticClass: "form-control",
+                attrs: { type: "color", id: "inputEmail3", value: "#000" }
+              })
+            ]),
+            _vm._v(" "),
+            _c(
+              "label",
+              {
+                staticClass: "col-sm-2 col-form-label tg-right",
+                attrs: { for: "inputEmail3" }
+              },
+              [_vm._v("Fondo")]
+            ),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-sm-2" }, [
+              _c("input", {
+                staticClass: "form-control",
+                attrs: { type: "color", id: "inputEmail3", value: "#000" }
+              })
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-sm-4" })
+          ]),
+          _vm._v(" "),
+          _c("article", { staticClass: "form-group row" }, [
+            _c("div", { staticClass: "col-sm-1" }),
+            _vm._v(" "),
+            _c(
+              "label",
+              {
+                staticClass: "col-sm-2 col-form-label tg-right",
+                attrs: { for: "inputEmail3" }
+              },
+              [_vm._v("Logo")]
+            ),
+            _vm._v(" "),
+            _c("input", {
+              staticClass: "form-control col-sm-6",
+              attrs: {
+                type: "file",
+                id: "inputEmail3",
+                placeholder: "Url de la pagina"
+              }
+            }),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-sm-3" }),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-sm-2" }),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-sm-8 td-center" }, [
+              _c("img", {
+                attrs: {
+                  src:
+                    "https://www.dosprofesenapuros.com/wp-content/uploads/2015/09/hoja-rota1-854x1024.png",
+                  width: "200",
+                  alt: ""
+                }
+              })
+            ])
+          ])
+        ])
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "section",
+      {
+        staticClass: "tab-pane fade",
+        attrs: {
+          id: "contact",
+          role: "tabpanel",
+          "aria-labelledby": "contact-tab"
+        }
+      },
+      [
+        _c("br"),
+        _vm._v(" "),
+        _c("form", [
+          _c("article", { staticClass: "form-group row" }, [
+            _c("div", { staticClass: "col-sm-1" }),
+            _vm._v(" "),
+            _c(
+              "label",
+              {
+                staticClass: "form-check-input col-sm-11",
+                attrs: { for: "exampleFormControlTextarea1" }
+              },
+              [_vm._v("Nota")]
+            ),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-sm-1" }),
+            _vm._v(" "),
+            _c("textarea", {
+              staticClass: "form-control col-sm-10",
+              attrs: { id: "exampleFormControlTextarea1", rows: "10" }
+            })
+          ])
+        ])
+      ]
+    )
   }
 ]
 render._withStripped = true

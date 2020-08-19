@@ -46,7 +46,7 @@
                 
               </td>
               <td class="td-center tg-edit">
-                <a class="tg-editlink"  v-on:click="modal('1')">
+                <a class="tg-editlink"  v-on:click="modal(item.Id,'Edit')">
                   <font-awesome-icon :icon="['fas', 'edit']" />
                 </a>
                 </td>
@@ -80,9 +80,9 @@
                       <br>
                       <form>
                         <article class="form-group row">
-                          <label for="inputEmail3" class="col-sm-2 col-form-label tg-right">Nombre</label>
+                          <label for="td-inputName" class="col-sm-2 col-form-label tg-right">Nombre</label>
                           <div class="col-sm-3">
-                            <input type="text" class="form-control" id="inputEmail3" placeholder="Nombre de la pagina">
+                            <input type="text" class="form-control" id="td-inputName" placeholder="Nombre de la pagina" v-model="dataPag_edit.Name">
                           </div>
                           <label for="inputEmail3" class="col-sm-1 col-form-label tg-right">	Roll</label>
                           <div class="col-sm-3">
@@ -196,13 +196,24 @@
       return {
         dataPaginas: [],
         dataTecnologias: [],
-        dataPag_Tec: []
+        dataPag_Tec: [],
+        dataPag_edit:{
+          id:"",
+          Name:""
+        }
       }
     },
  methods: {
-      modal:function(Fecha){
+      modal:function(id){
           $(".modal").show();
           $("#home-tab").click();
+          this.dataPag_edit.id=id;
+          
+          for(var i in this.dataPaginas){
+              if(this.dataPaginas[i].Id==id){
+                  this.dataPag_edit.Name=this.dataPaginas[i].Name;
+              }
+          }
       },
       cerrar:function(){
           $(".modal").hide();
