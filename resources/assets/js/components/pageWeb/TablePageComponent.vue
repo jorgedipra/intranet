@@ -1,5 +1,6 @@
 <template>
     <div>
+      <button type="button"  id="newPage" class="btn btn-info" v-on:click="modal(0,'new')">Nueva Pagina</button>
         <table class="table">
           <thead class="thead-dark">
             <tr>
@@ -82,16 +83,29 @@
                         <article class="form-group row">
                           <label for="td-inputName" class="col-sm-2 col-form-label tg-right">Nombre</label>
                           <div class="col-sm-3">
-                            <input type="text" class="form-control" id="td-inputName" placeholder="Nombre de la pagina" v-model="dataPag_edit.Name">
+                            <input type="text" class="form-control tg-input" id="td-inputName" name="td-inputName" title="Nombre" placeholder="Nombre de la pagina" v-model="dataPag_edit.Name">
                           </div>
                           <label for="inputEmail3" class="col-sm-1 col-form-label tg-right">	Roll</label>
                           <div class="col-sm-3">
-                            <select class="custom-select form-control" id="inputGroupSelect01">
-                              <option selected>Roll...</option>
-                              <option value="1">Desarrollo</option>
-                              <option value="2">Analista Master</option>
-                              <option value="3">Consultor</option>
-                            </select>
+                             <span v-if="dataPag_edit.Roll">
+                                 <select class="custom-select form-control" id="td-inputRoll" name="td-inputRoll" title="Roll">
+                                  <option value="1" v-if="dataPag_edit.Roll=='Desarrollador'" selected>Desarrollador</option>
+                                  <option value="1" v-else>Desarrollador</option>
+                                  <option value="2" v-if="dataPag_edit.Roll=='Analista Master'" selected>Analista Master</option>
+                                  <option value="2" v-else>Analista Master</option>
+                                  <option value="3" v-if="dataPag_edit.Roll=='Consultor'" selected>Consultor</option>
+                                  <option value="3" v-else>Consultor</option>
+                                </select>
+                              </span>
+                              <span v-else>
+                                <select class="custom-select form-control" id="td-inputRoll" name="td-inputRoll" title="Roll">
+                                  <option selected>Roll...</option>
+                                  <option value="1">Desarrollador</option>
+                                  <option value="2">Analista Master</option>
+                                  <option value="3">Consultor</option>
+                                </select>
+                              </span>
+
                           </div>
                           <div class="col-sm-3">
                             <div class="form-check">
@@ -176,7 +190,7 @@
               </div>
 
               <div class="modal-footer">
-                <button type="button" class="btn btn-success">Save changes</button>
+                <button type="button" id="savePage" class="btn btn-success" v-on:click="page(dataPag_edit.id)">Guardar</button>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal" v-on:click="cerrar()">Close</button>
               </div>
             </div>
@@ -199,19 +213,33 @@
         dataPag_Tec: [],
         dataPag_edit:{
           id:"",
-          Name:""
+          Name:"",
+          Roll:""
         }
       }
     },
  methods: {
-      modal:function(id){
+      page:function(id){
+        console.log(">>",id);
+      },
+      modal:function(id,type){
           $(".modal").show();
           $("#home-tab").click();
           this.dataPag_edit.id=id;
+          if(type=='new'){
+              $("#savePage").text("Crear");
+              $(".tg-input").val("");
+              this.dataPag_edit.Roll='';
+              this.dataPag_edit.Name='';
+          }else{
+              $("#savePage").text("Guardar Cambios");
+          }
+          
           
           for(var i in this.dataPaginas){
               if(this.dataPaginas[i].Id==id){
                   this.dataPag_edit.Name=this.dataPaginas[i].Name;
+                  this.dataPag_edit.Roll=this.dataPaginas[i].Roll;
               }
           }
       },
@@ -313,6 +341,11 @@
   }
 </script>
 <style lang="stylus">
+#newPage{
+  position:absolute;
+  right: 0;
+  margin-top: -80px;
+}
   .tg-inp-tx{
     width: 119%;
     text-align: center;
