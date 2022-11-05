@@ -1,13 +1,15 @@
 <template>
     <div class="container">
+        <div class="row"><span id="space"></span></div>
         <div class="row">
+            <div class="col-md-2"></div>
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
                     <div class="panel-heading">
                        <strong>Jorgedipra</strong> 
                     </div>
 
-                    <div class="panel-body text-center">
+                    <div class="panel-body text-center card-body">
                         <img src="/image/home/img2.png" class="imgHome" alt="jorgedipra">
                         <br><br>  
                         <div class="btn-group text-center" role="group" aria-label="Basic">
@@ -48,5 +50,18 @@
 .btn-dark{
     color:#fff;
     background: #333;
+}
+.btn-group{
+    display: block;
+}
+.dropdown>a {
+    color: #fff;
+}
+.dropdown-menu>li>a {
+    padding-left: 20px;
+    color: #343a40;
+}
+li.dropdown {
+    text-align: center;
 }
 </style>

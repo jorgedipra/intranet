@@ -2,69 +2,76 @@
     <div class="container">
         <div class="col-1 d-none d-sm-none d-md-block"></div>
         <div class="navbar-header col">
-          <!-- Branding Image -->
-          <a class="navbar-brand col" href="{{ url('/') }}">
-              <img src="/image/h1.jpg"  id="nav-logo" width="30" height="30" style="display: inline;border-radius: 100%;" class="d-inline-block align-top" alt="Jorgedipra" title="logo-Jorgedipra">
-              {{ config('app.name', 'Intranet') }}
-          </a>
-       </div>
-       <!-- Collapsed Hamburger -->
-       <button class="navbar-toggler d-block d-sm-block d-md-none" type="button" data-toggle="collapse" data-target="#app-navbar-collapse" aria-controls="app-navbar-collapse" aria-expanded="false" aria-label="Toggle navigation" style="margin-right: 20px;">
-          <span class="navbar-toggler-icon"></span>
+        <!-- Branding Image -->
+            <a class="navbar-brand col" href="{{ url('/') }}">
+                <img src="/image/h1.jpg"  id="nav-logo" width="30" height="30" style="display: inline;border-radius: 100%;" class="d-inline-block align-top" alt="Jorgedipra" title="logo-Jorgedipra">
+                {{ config('app.name', 'Intranet') }}
+            </a>
+        </div>
+        <!-- Collapsed Hamburger -->
+        <button class="navbar-toggler d-block d-sm-block d-md-none" type="button" data-toggle="collapse" data-target="#app-navbar-collapse" aria-controls="app-navbar-collapse" aria-expanded="false" aria-label="Toggle navigation" style="margin-right: 20px;">
+            <span class="navbar-toggler-icon"></span>
         </button>
         
         
-      <div class="collapse navbar-collapse col-lg-10  col-md-8 col-sm-12" id="app-navbar-collapse">
-          <!-- Left Side Of Navbar -->
-          <ul class="nav navbar-nav">
-              &nbsp;
-          </ul>
-          <ul class="navbar-nav mr-auto mt-2 mt-lg-0 d-block d-sm-block d-md-none text-center">
-              <li class="nav-item active">
-                  <a class="nav-link" href="{{ url('/intranet') }}">
+        <div class="collapse navbar-collapse col-lg-10  col-md-8 col-sm-12" id="app-navbar-collapse">
+            <div class="col-md-8"></div>
+        <!-- Left Side Of Navbar -->
+        <ul class="nav navbar-nav">
+            &nbsp;
+        </ul>
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0 d-block d-sm-block d-md-none text-center">
+        @if (Auth::guest())
+
+        @else 
+            <li class="nav-item active">
+                <a class="nav-link" href="{{ url('/intranet') }}">
                     Intranet <span class="sr-only">(current)</span>
-                  </a>
-              </li>
-              <li class="nav-item">
+                </a>
+            </li>
+            <li class="nav-item active">
                 <a class="nav-link" href="{{ url('/web') }}">home</a>
-              </li>
-              <li class="nav-item">
-                  <a class="nav-link" href="{{ route('logout') }}"
-                  onclick="event.preventDefault();
-                          document.getElementById('logout-form').submit();">
-                      Logout
-                  </a>
-              </li>
-          </ul>
-          <!-- Right Side Of Navbar -->
-          <ul class="nav navbar-nav navbar-right d-none d-sm-none d-md-block">
-              <!-- Authentication Links -->
-              @if (Auth::guest())
-                  <li><a href="{{ route('login') }}">Login</a></li>
-                  <li><a href="{{ route('register') }}">Register</a></li>
-              @else
-                  <li class="dropdown">
-                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                          {{ Auth::user()->name }} 
-                      </a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="{{ url('/PageWeb') }}">PageWeb</a>
+            </li>
+        @endif    
+        </ul>
+        <!-- Right Side Of Navbar -->
+        <ul class="nav navbar-nav navbar-right form-row">
+        <!-- Authentication Links -->
+        @if (Auth::guest())
+            <li class="col"><a class="btn btn-dark form-control" href="{{ route('login') }}">Login</a></li>
+            <li class="col"><a class="btn btn-dark form-control" href="{{ route('register') }}" >Register</a></li>
+        @else
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                    {{ Auth::user()->name }} 
+                </a>
 
-                      <ul class="dropdown-menu" role="menu">
-                          <li>
-                              <a href="{{ route('logout') }}"
-                                  onclick="event.preventDefault();
-                                          document.getElementById('logout-form').submit();">
-                                  Logout
-                              </a>
-
-                              <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                  {{ csrf_field() }}
-                              </form>
-                          </li>
-                      </ul>
-                  </li>
-              @endif
-          </ul>
-      </div> 
+                <ul class="dropdown-menu" role="menu">
+                    <li class="nav-item ">
+                        <a class="dropdown-item" href="{{ url('/intranet') }}">
+                            Intranet <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="dropdown-item" href="{{ url('/web') }}">home</a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="dropdown-item" href="{{ url('/PageWeb') }}">PageWeb</a>
+                    </li>  
+                    <li><hr class="dropdown-divider"></li>
+                    <li class="nav-item ">
+                        <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            {{ csrf_field() }}
+                        </form>
+                    </li>
+                </ul>
+            </li>
+        @endif
+    </ul>
+    </div> 
     </div>
-    
 </nav>

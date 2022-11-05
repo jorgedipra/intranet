@@ -85,7 +85,7 @@
                           <div class="col-sm-3">
                             <input type="text" class="form-control tg-input" id="td-inputName" name="td-inputName" title="Nombre" placeholder="Nombre de la pagina" v-model="dataPag_edit.Name">
                           </div>
-                          <label for="inputEmail3" class="col-sm-1 col-form-label tg-right">	Roll</label>
+                          <label for="td-inputRoll" class="col-sm-1 col-form-label tg-right">	Roll</label>
                           <div class="col-sm-3">
                              <span v-if="dataPag_edit.Roll">
                                  <select class="custom-select form-control" id="td-inputRoll" name="td-inputRoll" title="Roll">
@@ -109,12 +109,14 @@
                           </div>
                           <div class="col-sm-3">
                             <div class="form-check">
-                              <input class="form-check-input col-sm-1 tg-success" type="radio" name="gridRadios" id="gridRadios1" value="option1" checked>
+                              <input  v-if="dataPag_edit.Estado=='1'" class="form-check-input col-sm-1 tg-success" type="radio" name="gridRadios" id="gridRadios1" value="option1" checked>
+                              <input  v-else class="form-check-input col-sm-1 tg-success" type="radio" name="gridRadios" id="gridRadios1" value="option1" >
                               <label class="form-check-label col-sm-6 tg-success" for="gridRadios1">
                                 Activo
                               </label>
                               <div class="col-sm-4"></div><br>
-                              <input class="form-check-input col-sm-1 tg-error" type="radio" name="gridRadios" id="gridRadios2" value="option2">
+                              <input v-if="dataPag_edit.Estado=='0'" class="form-check-input col-sm-1 tg-error" type="radio" name="gridRadios" id="gridRadios2" value="option2" checked>
+                              <input v-else class="form-check-input col-sm-1 tg-error" type="radio" name="gridRadios" id="gridRadios2" value="option2">
                               <label class="form-check-label col-sm-6 tg-error" for="gridRadios2">
                                 Offline
                               </label>
@@ -123,22 +125,24 @@
                         </article>
                         <br>  
                         <article class="form-group row">
-                          <label for="inputEmail3" class="col-sm-2 col-form-label tg-right">Url</label>
+                          <label for="td-inputUrl" class="col-sm-2 col-form-label tg-right">Url</label>
                           <div class="col-sm-3">
-                            <input type="text" class="form-control" id="inputEmail3" placeholder="Url de la pagina">
+                            <input type="text" class="form-control" id="td-inputUrl" placeholder="Url de la pagina" v-model="dataPag_edit.Url">
                           </div>
-                          <label for="inputEmail3" class="col-sm-1 col-form-label tg-right">Url2</label>
+                          <label for="td-inputUrl2" class="col-sm-1 col-form-label tg-right">Url2</label>
                           <div class="col-sm-3">
-                            <input type="text" class="form-control" id="inputEmail3" placeholder="Url alternativo">
+                            <input type="text" class="form-control" id="td-inputUrl2" placeholder="Url alternativo" v-model="dataPag_edit.Url2">
                           </div>
                           <div class="col-sm-3">
                             <div class="form-check">
-                              <input class="form-check-input col-sm-1 tg-edit" type="radio" name="gridRadios2" id="gridRadios3" value="option1" checked>
+                              <input v-if="dataPag_edit.Private_Public=='1'" class="form-check-input col-sm-1 tg-edit" type="radio" name="gridRadios2" id="gridRadios3" value="option1" checked>
+                              <input  v-else class="form-check-input col-sm-1 tg-edit" type="radio" name="gridRadios2" id="gridRadios3" value="option1" >
                               <label class="form-check-label col-sm-7 tg-edit" for="gridRadios3">
                                 privado
                               </label>
                               <div class="col-sm-3"></div><br>
-                              <input class="form-check-input col-sm-1 tg-success" type="radio" name="gridRadios2" id="gridRadios4" value="option2">
+                              <input v-if="dataPag_edit.Private_Public=='0'" class="form-check-input col-sm-1 tg-success" type="radio" name="gridRadios2" id="gridRadios4" value="option2" checked>
+                              <input  v-else class="form-check-input col-sm-1 tg-success" type="radio" name="gridRadios2" id="gridRadios4" value="option2">
                               <label class="form-check-label col-sm-6 tg-success" for="gridRadios4">
                                 publico
                               </label>
@@ -169,8 +173,9 @@
                               <input type="file" class="form-control col-sm-6" id="inputEmail3" placeholder="Url de la pagina">
                               <div class="col-sm-3"></div>
                               <div class="col-sm-2"></div>
-                              <div class="col-sm-8 td-center">
-                                <img src="https://www.dosprofesenapuros.com/wp-content/uploads/2015/09/hoja-rota1-854x1024.png" width="200" alt="">
+                              <div class="col-sm-8 td-center"><br>
+                                <img   v-if="dataPag_edit.background !=''"  :src="dataPag_edit.background" id="fondo" width="200" alt="">
+                                <img   v-else src="https://www.dosprofesenapuros.com/wp-content/uploads/2015/09/hoja-rota1-854x1024.png" id="fondo" width="200" alt="">
                               </div>
                           </article>
                       </form>
@@ -182,7 +187,7 @@
                               <div class="col-sm-1"></div>
                               <label class="form-check-input col-sm-11"  for="exampleFormControlTextarea1">Nota</label>
                               <div class="col-sm-1"></div>
-                              <textarea class="form-control col-sm-10" id="exampleFormControlTextarea1" rows="10"></textarea>
+                              <textarea class="form-control col-sm-10" id="Description" name="Description" rows="10" v-model="dataPag_edit.Description"></textarea>
                           </article>
                       </form>
                     </section>
@@ -190,7 +195,7 @@
               </div>
 
               <div class="modal-footer">
-                <button type="button" id="savePage" class="btn btn-success" v-on:click="page(dataPag_edit.id)">Guardar</button>
+                <button type="button" id="savePage" class="btn btn-success" v-on:click="page(dataPag_edit)">Guardar</button>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal" v-on:click="cerrar()">Close</button>
               </div>
             </div>
@@ -214,13 +219,53 @@
         dataPag_edit:{
           id:"",
           Name:"",
-          Roll:""
+          Roll:"",
+          Url:"",
+          Url2:"",
+          Estado:"",
+          Private_Public:"",
+          background:"",
+          Description:"",
         }
       }
     },
  methods: {
-      page:function(id){
-        console.log(">>",id);
+      page:function(dataPag){
+        // console.log(dataPag);
+         var formData = new FormData();
+        formData.append('id',dataPag.id);
+        formData.append('Description',dataPag.Description);
+        formData.append('Estado',dataPag.Estado);
+        formData.append('Name',dataPag.Name);
+        formData.append('Private_Public',dataPag.Private_Public);
+        formData.append('Roll',dataPag.Roll);
+        formData.append('Url',dataPag.Url);
+        formData.append('Url2',dataPag.Url2);
+        formData.append('Background',dataPag.background);
+
+            axios.post('/web/update_pageWeb', formData)
+                .then(function (response) {
+                    // handle success
+                    // console.log(response);
+                    var msg ='';
+                    if(response.data == '200'){
+                        msg ="Actulización exitosa, codigo: [ "+response.data+" ]";
+                        Alerts.windows('alert-success','success',msg);
+                    }else{
+                        msg ="Proceso parcialmente Exitoso, Problemas en la consulta, codigo: [ "+response.data+" ]";
+                        Alerts.windows('alert-warning','warning',msg);
+                    }
+                })
+                .catch(function (error) {
+                    // handle error
+                    // console.log(error);
+                    var msg ='';
+                    msg ="Ocurrio algo, Error: [ "+error+" ]";
+                    Alerts.windows('alert-danger','danger',msg);
+                })
+                .then(function () {
+                    // always executed
+                });
       },
       modal:function(id,type){
           $(".modal").show();
@@ -231,6 +276,12 @@
               $(".tg-input").val("");
               this.dataPag_edit.Roll='';
               this.dataPag_edit.Name='';
+              this.dataPag_edit.Url='';
+              this.dataPag_edit.Url2='';
+              this.dataPag_edit.Estado='';
+              this.dataPag_edit.Private_Public='';
+              this.dataPag_edit.background='';
+              this.dataPag_edit.Description='';
           }else{
               $("#savePage").text("Guardar Cambios");
           }
@@ -240,6 +291,12 @@
               if(this.dataPaginas[i].Id==id){
                   this.dataPag_edit.Name=this.dataPaginas[i].Name;
                   this.dataPag_edit.Roll=this.dataPaginas[i].Roll;
+                  this.dataPag_edit.Url=this.dataPaginas[i].Url;
+                  this.dataPag_edit.Url2=this.dataPaginas[i].Home;
+                  this.dataPag_edit.Estado=this.dataPaginas[i].Estado;
+                  this.dataPag_edit.Private_Public=this.dataPaginas[i].Private_Public;
+                  this.dataPag_edit.background=this.dataPaginas[i].background;
+                  this.dataPag_edit.Description=this.dataPaginas[i].Description;
               }
           }
       },

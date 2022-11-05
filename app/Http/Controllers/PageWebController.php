@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\File;
 use anlutro\cURL\cURL;
 use App\Profile;
 use App\carrusel;
+use App\Pagina;
 
 
 class PageWebController extends Controller
@@ -81,7 +82,6 @@ class PageWebController extends Controller
             $carrusel->Url = $path;
         }
 
-
         try {
             $carrusel->save();
             $resul = "200";  
@@ -91,4 +91,27 @@ class PageWebController extends Controller
 
         return  $resul;
     }//END=>update_carrusel
+
+    public function update_pageWeb(Request $request)
+    {
+        $paginaW = Pagina::find($request->id);
+
+        $paginaW->Name = $request->Name;
+        $paginaW->Estado = $request->Estado;
+        $paginaW->Description = $request->Description;
+        $paginaW->Private_Public = $request->Private_Public;
+        $paginaW->Roll = $request->Roll;
+        $paginaW->Url = $request->Url;
+        $paginaW->Home = $request->Url2;
+        $paginaW->background = $request->Background;
+        
+
+        try {
+            $paginaW->save();
+            $resul = "200";  
+        } catch (\Exception $e) {
+            $resul = '204';
+        }
+        return $resul;
+    }//END=>update_pageWeb
 }//::END class
