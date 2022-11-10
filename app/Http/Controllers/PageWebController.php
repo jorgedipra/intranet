@@ -96,15 +96,17 @@ class PageWebController extends Controller
     {
         $paginaW = Pagina::find($request->id);
 
+        //General
         $paginaW->Name = $request->Name;
         $paginaW->Estado = $request->Estado;
-        $paginaW->Description = utf8_encode($request->Description);
         $paginaW->Private_Public = $request->Private_Public;
         $paginaW->Roll = $request->Roll;
         $paginaW->Url = $request->Url;
         $paginaW->Home = $request->Url2;
+        //Diseño
         $paginaW->background = $request->Background;
-        
+        //Descripcion
+        $paginaW->Description = utf8_encode($request->Description);        
 
         try {
             $paginaW->save();

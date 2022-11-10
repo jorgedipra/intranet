@@ -175,7 +175,7 @@
                               <div class="col-sm-3"></div>
                               <div class="col-sm-2"></div>
                               <div class="col-sm-8 td-center"><br>
-                                <img   v-if="dataPag_edit.background !=''"  :src="dataPag_edit.background" id="fondo" width="200" alt="">
+                                <img   v-if="dataPag_edit.Logo !=''"  :src="dataPag_edit.Logo" id="fondo" width="200" alt="">
                                 <img   v-else :src="`/image/hoja-rota1-854x1024.png`" id="fondo" width="200" alt="">
                               </div>
                           </article>
@@ -225,6 +225,7 @@
           Estado:"",
           Private_Public:"",
           background:"",
+          Logo:"",
           Description:"",
         }
       }
@@ -232,16 +233,21 @@
  methods: {
       page:function(dataPag){
         // console.log(dataPag);
-         var formData = new FormData();
+        var formData = new FormData();
+        //General
         formData.append('id',dataPag.id);
-        formData.append('Description',dataPag.Description);
         formData.append('Estado',dataPag.Estado);
         formData.append('Name',dataPag.Name);
         formData.append('Private_Public',dataPag.Private_Public);
         formData.append('Roll',dataPag.Roll);
         formData.append('Url',dataPag.Url);
         formData.append('Url2',dataPag.Url2);
+        //Diseño
         formData.append('Background',dataPag.background);
+        formData.append('Logo',dataPag.Logo);
+        //Descripción
+        formData.append('Description',dataPag.Description);
+
 
             axios.post('/web/update_pageWeb', formData)
                 .then(function (response) {
@@ -274,13 +280,17 @@
           if(type=='new'){
               $("#savePage").text("Crear");
               $(".tg-input").val("");
+              //General
               this.dataPag_edit.Roll='';
               this.dataPag_edit.Name='';
               this.dataPag_edit.Url='';
               this.dataPag_edit.Url2='';
               this.dataPag_edit.Estado='';
               this.dataPag_edit.Private_Public='';
+              //Diseño
               this.dataPag_edit.background='';
+              this.dataPag_edit.Logo='';
+              //Descripcion
               this.dataPag_edit.Description='';
           }else{
               $("#savePage").text("Guardar Cambios");
@@ -289,19 +299,28 @@
           
           for(var i in this.dataPaginas){
               if(this.dataPaginas[i].id==id){
+                  //General
                   this.dataPag_edit.Name=this.dataPaginas[i].Name;
                   this.dataPag_edit.Roll=this.dataPaginas[i].Roll;
                   this.dataPag_edit.Url=this.dataPaginas[i].Url;
                   this.dataPag_edit.Url2=this.dataPaginas[i].Home;
                   this.dataPag_edit.Estado=this.dataPaginas[i].Estado;
                   this.dataPag_edit.Private_Public=this.dataPaginas[i].Private_Public;
+                  //Diseño
                   this.dataPag_edit.background=this.dataPaginas[i].background;
+                  this.dataPag_edit.Logo=this.dataPaginas[i].Logo;
+                  //Descripcion
                   this.dataPag_edit.Description=this.dataPaginas[i].Description;
               }
           }
       },
       cerrar:function(){
           $(".modal").hide();
+          $(".nav-link").attr({"aria-selected":"false","aria-expanded":"false"}).removeClass("active");
+          $(".tab-pane").removeClass("active show in");
+          $("#home-tab").attr({"aria-selected":"true","aria-expanded":"true"}).addClass("active");
+          $("#home").addClass("active show in");
+
       },
       formatdate: function(Fecha){
         var info = Fecha.split('-');
