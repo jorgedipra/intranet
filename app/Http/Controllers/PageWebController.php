@@ -98,7 +98,7 @@ class PageWebController extends Controller
 
         $paginaW->Name = $request->Name;
         $paginaW->Estado = $request->Estado;
-        $paginaW->Description = $request->Description;
+        $paginaW->Description = utf8_encode($request->Description);
         $paginaW->Private_Public = $request->Private_Public;
         $paginaW->Roll = $request->Roll;
         $paginaW->Url = $request->Url;
