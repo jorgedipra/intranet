@@ -46,7 +46,7 @@
     },
     mounted() {
         this.dataPerfil = this.data.perfil;
-        console.log(">>"+this.dataPerfil[0].Imagen2);
+        //console.log(">>"+this.dataPerfil[0].Imagen2);
         
         this.imagenMiniatura=this.API_IMG +'/'+ this.dataPerfil[0].Imagen2;
      },

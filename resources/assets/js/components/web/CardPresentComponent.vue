@@ -6,13 +6,14 @@
     <div class="card-body" v-for="item in dataPerfil" :key="item.id" >
         <form @submit.prevent="addProduct" enctype="multipart/form-data">
             <div class="form-group">
-                Selecciona una imagen en formato PNG de tamaño inferior a 1MB.<br/>
+                Selecciona una imagen en formato [PNG, JPG, jpeg] de tamaño inferior a 1MB.<br/>
                 <input type="file" name="fimagen" accept="image/gif, image/jpeg, image/png" @change="processFile($event)"/>
             </div>
             <img  v-bind:src="imagen" alt="Card image cap" class="img-thumbnail"> 
+            <small class="form-text text-muted">*Tamaño de <b>350 X 170</b></small>
             <hr>
-            <input type="text" class="form-control mb-2" placeholder="Titulo de la card" v-model="item.Title_card" >
             <small id="emailHelp" class="form-text text-muted"> *Nombre de la pagina <strong>Title_card</strong>.</small>
+            <input type="text" class="form-control mb-2" placeholder="Titulo de la card" v-model="item.Title_card" >
             <input type="text" class="form-control mb-2" placeholder="Nombre" v-model="item.Nombre">
             <input type="text" class="form-control mb-2" placeholder="Apellido" v-model="item.Apellido">
             <hr>
@@ -121,5 +122,10 @@
 <style lang="stylus">
 #btn-save-card{
     float: right;
+}
+#alerts{
+    position: fixed;
+    bottom: 0;
+    right: 0;
 }
 </style>

@@ -7,11 +7,11 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <h2>{{ ucfirst(\Request::route()->getName()) }}</h2>
+                    <h2>&nbsp;&nbsp;{{ ucfirst(\Request::route()->getName()) }}</h2>
                 </div>
 
                 <div class="container">
-                    <div class="row">
+                    <div class="row justify-content-center">
                         <div class="col-12"> &nbsp; </div>
                         <div class="col-11">
                             <tablepage-components

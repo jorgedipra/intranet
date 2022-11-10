@@ -2,7 +2,7 @@
     <div>
       <button type="button"  id="newPage" class="btn btn-info" v-on:click="modal(0,'new')">Nueva Pagina</button>
         <table class="table">
-          <thead class="thead-dark">
+          <thead class="thead-dark border-dark">
             <tr>
               <th scope="col">#</th>
               <th scope="col">Nombre</th>
@@ -13,7 +13,7 @@
               <th scope="col" class="td-center">Editar</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody class="border-dark">
             <tr v-for="(item, index) in dataPaginas" :key="item.id" >
               <th scope="row">{{ index+1 }}</th>
               <td>
@@ -47,7 +47,7 @@
                 
               </td>
               <td class="td-center tg-edit">
-                <a class="tg-editlink"  v-on:click="modal(item.Id,'Edit')">
+                <a class="tg-editlink"  v-on:click="modal(item.id,'Edit')">
                   <font-awesome-icon :icon="['fas', 'edit']" />
                 </a>
                 </td>
@@ -111,27 +111,28 @@
                             <div class="form-check">
                               <input  v-if="dataPag_edit.Estado=='1'" class="form-check-input col-sm-1 tg-success" type="radio" name="gridRadios" id="gridRadios1" value="option1" checked>
                               <input  v-else class="form-check-input col-sm-1 tg-success" type="radio" name="gridRadios" id="gridRadios1" value="option1" >
-                              <label class="form-check-label col-sm-6 tg-success" for="gridRadios1">
+                              <label class="form-check-label col-sm-7 tg-success" for="gridRadios1">
                                 Activo
                               </label>
                               <div class="col-sm-4"></div><br>
                               <input v-if="dataPag_edit.Estado=='0'" class="form-check-input col-sm-1 tg-error" type="radio" name="gridRadios" id="gridRadios2" value="option2" checked>
                               <input v-else class="form-check-input col-sm-1 tg-error" type="radio" name="gridRadios" id="gridRadios2" value="option2">
-                              <label class="form-check-label col-sm-6 tg-error" for="gridRadios2">
+                              <label class="form-check-label col-sm-7 tg-error" for="gridRadios2">
                                 Offline
                               </label>
                             </div>
                           </div>
                         </article>
-                        <br>  
+                        <hr>  
                         <article class="form-group row">
-                          <label for="td-inputUrl" class="col-sm-2 col-form-label tg-right">Url</label>
+                          <label for="td-inputUrl" class="col-sm-2 col-form-label tg-right">Url Pagina</label>
                           <div class="col-sm-3">
                             <input type="text" class="form-control" id="td-inputUrl" placeholder="Url de la pagina" v-model="dataPag_edit.Url">
                           </div>
-                          <label for="td-inputUrl2" class="col-sm-1 col-form-label tg-right">Url2</label>
+                          <label for="td-inputUrl2" class="col-sm-1 col-form-label tg-right">Url2 </label>
                           <div class="col-sm-3">
                             <input type="text" class="form-control" id="td-inputUrl2" placeholder="Url alternativo" v-model="dataPag_edit.Url2">
+                            <small>si no es la misma usar : <b>web.archive.org</b></small>
                           </div>
                           <div class="col-sm-3">
                             <div class="form-check">
@@ -143,7 +144,7 @@
                               <div class="col-sm-3"></div><br>
                               <input v-if="dataPag_edit.Private_Public=='0'" class="form-check-input col-sm-1 tg-success" type="radio" name="gridRadios2" id="gridRadios4" value="option2" checked>
                               <input  v-else class="form-check-input col-sm-1 tg-success" type="radio" name="gridRadios2" id="gridRadios4" value="option2">
-                              <label class="form-check-label col-sm-6 tg-success" for="gridRadios4">
+                              <label class="form-check-label col-sm-7 tg-success" for="gridRadios4">
                                 publico
                               </label>
                             </div>
@@ -175,7 +176,7 @@
                               <div class="col-sm-2"></div>
                               <div class="col-sm-8 td-center"><br>
                                 <img   v-if="dataPag_edit.background !=''"  :src="dataPag_edit.background" id="fondo" width="200" alt="">
-                                <img   v-else src="https://www.dosprofesenapuros.com/wp-content/uploads/2015/09/hoja-rota1-854x1024.png" id="fondo" width="200" alt="">
+                                <img   v-else :src="`/image/hoja-rota1-854x1024.png`" id="fondo" width="200" alt="">
                               </div>
                           </article>
                       </form>
@@ -183,11 +184,10 @@
                     <section class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
                       <br>
                       <form>
-                          <article class="form-group row">
+                          <article class="form-group row justify-content-center">
                               <div class="col-sm-1"></div>
-                              <label class="form-check-input col-sm-11"  for="exampleFormControlTextarea1">Nota</label>
-                              <div class="col-sm-1"></div>
-                              <textarea class="form-control col-sm-10" id="Description" name="Description" rows="10" v-model="dataPag_edit.Description"></textarea>
+                              <label class="form-check-input col-sm-10"  for="exampleFormControlTextarea1">Nota</label>
+                              <textarea class="form-control col-sm-9" id="Description" name="Description" rows="10" v-model="dataPag_edit.Description"></textarea>
                           </article>
                       </form>
                     </section>
@@ -288,7 +288,7 @@
           
           
           for(var i in this.dataPaginas){
-              if(this.dataPaginas[i].Id==id){
+              if(this.dataPaginas[i].id==id){
                   this.dataPag_edit.Name=this.dataPaginas[i].Name;
                   this.dataPag_edit.Roll=this.dataPaginas[i].Roll;
                   this.dataPag_edit.Url=this.dataPaginas[i].Url;
@@ -402,6 +402,14 @@
   position:absolute;
   right: 0;
   margin-top: -80px;
+}
+#alerts{
+  position: fixed;
+  bottom: 0;
+  right: 0;
+}
+.border-dark{
+  border:solid 1px;
 }
   .tg-inp-tx{
     width: 119%;
