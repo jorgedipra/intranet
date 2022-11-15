@@ -81,14 +81,14 @@
                       <br>
                       <form>
                         <article class="form-group row">
-                          <label for="td-inputName" class="col-sm-2 col-form-label tg-right">Nombre</label>
+                          <label for="td-inputName" class="col-sm-2 col-form-label tg-right">Nombre:</label>
                           <div class="col-sm-3">
-                            <input type="text" class="form-control tg-input" id="td-inputName" name="td-inputName" title="Nombre" placeholder="Nombre de la pagina" v-model="dataPag_edit.Name">
+                            <input type="text" class="form-control tg-input font-15px" id="td-inputName" name="td-inputName" title="Nombre" placeholder="Nombre de la pagina" v-model="dataPag_edit.Name">
                           </div>
-                          <label for="td-inputRoll" class="col-sm-1 col-form-label tg-right">	Roll</label>
+                          <label for="td-inputRoll" class="col-sm-1 col-form-label tg-right">	Roll:</label>
                           <div class="col-sm-3">
-                             <span v-if="dataPag_edit.Roll">
-                                 <select class="custom-select form-control" id="td-inputRoll" name="td-inputRoll" title="Roll">
+                            <span v-if="dataPag_edit.Roll">
+                                <select class="custom-select form-control" id="td-inputRoll" name="td-inputRoll" title="Roll">
                                   <option value="1" v-if="dataPag_edit.Roll=='Desarrollador'" selected>Desarrollador</option>
                                   <option value="1" v-else>Desarrollador</option>
                                   <option value="2" v-if="dataPag_edit.Roll=='Analista Master'" selected>Analista Master</option>
@@ -105,34 +105,6 @@
                                   <option value="3">Consultor</option>
                                 </select>
                               </span>
-
-                          </div>
-                          <div class="col-sm-3">
-                            <div class="form-check">
-                              <input  v-if="dataPag_edit.Estado=='1'" class="form-check-input col-sm-1 tg-success" type="radio" name="gridRadios" id="gridRadios1" value="option1" checked>
-                              <input  v-else class="form-check-input col-sm-1 tg-success" type="radio" name="gridRadios" id="gridRadios1" value="option1" >
-                              <label class="form-check-label col-sm-7 tg-success" for="gridRadios1">
-                                Activo
-                              </label>
-                              <div class="col-sm-4"></div><br>
-                              <input v-if="dataPag_edit.Estado=='0'" class="form-check-input col-sm-1 tg-error" type="radio" name="gridRadios" id="gridRadios2" value="option2" checked>
-                              <input v-else class="form-check-input col-sm-1 tg-error" type="radio" name="gridRadios" id="gridRadios2" value="option2">
-                              <label class="form-check-label col-sm-7 tg-error" for="gridRadios2">
-                                Offline
-                              </label>
-                            </div>
-                          </div>
-                        </article>
-                        <hr>  
-                        <article class="form-group row">
-                          <label for="td-inputUrl" class="col-sm-2 col-form-label tg-right">Url Pagina</label>
-                          <div class="col-sm-3">
-                            <input type="text" class="form-control" id="td-inputUrl" placeholder="Url de la pagina" v-model="dataPag_edit.Url">
-                          </div>
-                          <label for="td-inputUrl2" class="col-sm-1 col-form-label tg-right">Url2 </label>
-                          <div class="col-sm-3">
-                            <input type="text" class="form-control" id="td-inputUrl2" placeholder="Url alternativo" v-model="dataPag_edit.Url2">
-                            <small>si no es la misma usar : <b>web.archive.org</b></small>
                           </div>
                           <div class="col-sm-3">
                             <div class="form-check">
@@ -150,33 +122,83 @@
                             </div>
                           </div>
                         </article>
+                        <hr>  
+                        <article class="form-group row">
+                          <label for="td-inputUrl" class="col-sm-2 col-form-label tg-right">Url Pagina:</label>
+                          <div class="col-sm-3">
+                            <input type="text" class="form-control font-15px" id="td-inputUrl" placeholder="Url de la pagina" v-model="dataPag_edit.Url">
+                          </div>
+                          <label for="td-inputUrl2" class="col-sm-1 col-form-label tg-right">Url2:</label>
+                          <div class="col-sm-3">
+                            <input type="text" class="form-control font-15px" id="td-inputUrl2" placeholder="Url alternativo" v-model="dataPag_edit.Url2">
+                            <small>si no es la misma usar : <b>web.archive.org</b></small>
+                          </div>
+                          <div class="col-sm-3">
+                            <div class="form-check">
+                              <input  v-if="dataPag_edit.Estado=='1'" class="form-check-input col-sm-1 tg-success" type="radio" name="gridRadios" id="gridRadios1" value="option1" checked>
+                              <input  v-else class="form-check-input col-sm-1 tg-success" type="radio" name="gridRadios" id="gridRadios1" value="option1" >
+                              <label class="form-check-label col-sm-7 tg-success" for="gridRadios1">
+                                Activo
+                              </label>
+                              <div class="col-sm-4"></div><br>
+                              <input v-if="dataPag_edit.Estado=='0'" class="form-check-input col-sm-1 tg-error" type="radio" name="gridRadios" id="gridRadios2" value="option2" checked>
+                              <input v-else class="form-check-input col-sm-1 tg-error" type="radio" name="gridRadios" id="gridRadios2" value="option2">
+                              <label class="form-check-label col-sm-7 tg-error" for="gridRadios2">
+                                Offline
+                              </label>
+                            </div>
+                          </div>
+                        </article>
                       </form>
                       <br>
                     </section>
                     <section class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                       <br>  
                       <form>
-                          <article class="form-group row">
-                            <div class="col-sm-1"></div>
-                            <label for="inputEmail3" class="col-sm-2 col-form-label tg-right">Color</label>
-                            <div class="col-sm-2">
-                              <input type="color" class="form-control" id="inputEmail3" value="#000">
+                          <article class="form-group row justify-content-center">
+                            <div class="col-sm-3">
+                              <span v-if="dataPag_edit.Color">
+                                <select name="Color" id="inputStyle" class="form-control font-15px" :on-change="changeStyle()">
+                                  <option value="1" v-if="dataPag_edit.Color=='1'" selected>Diseño 1</option>
+                                  <option value="1" v-else>Diseño 1</option>
+                                  <option value="2" v-if="dataPag_edit.Color=='2'" selected>Diseño 2</option>
+                                  <option value="2" v-else>Diseño 2</option>
+                                  <option value="3">Diseño 3</option>
+                                </select>
+                              </span>
+                              <span v-else>
+                                  <select name="Color" id="inputStyle" class="form-control font-15px" v-on:change="changeStyle()" >
+                                  <option selected>Seleciones Diseño</option>
+                                  <option value="1">Diseño 1</option>
+                                  <option value="2">Diseño 2</option>
+                                  <option value="3">Diseño 3</option>
+                                </select>
+                              </span>
                             </div>
-                            <label for="inputEmail3" class="col-sm-2 col-form-label tg-right">Fondo</label>
-                            <div class="col-sm-2">
-                              <input type="color" class="form-control" id="inputEmail3" value="#000">
+                            <div class="col-sm-3 row">
+                              <label for="inputColor" class="col-sm-6 col-form-label tg-right">Fondo</label>
+                              <input type="color" class="form-control col-sm-6" id="inputColor" value="#000" disabled>
                             </div>
-                            <div class="col-sm-4"></div>
+                            <div class="col-sm-3 row">
+                              <label for="inputColor" class="col-sm-6 col-form-label tg-right">Color</label>
+                              <input type="color" class="form-control col-sm-6" id="inputColor" value="#000" >
+                            </div>
+                            <!-- <div class="col-sm-1"></div> -->
                           </article>
-                          <article class="form-group row">
-                            <div class="col-sm-1"></div>
-                            <label for="inputEmail3" class="col-sm-2 col-form-label tg-right">Logo</label>
-                              <input type="file" class="form-control col-sm-6" id="inputEmail3" placeholder="Url de la pagina">
-                              <div class="col-sm-3"></div>
-                              <div class="col-sm-2"></div>
-                              <div class="col-sm-8 td-center"><br>
-                                <img   v-if="dataPag_edit.Logo !=''"  :src="dataPag_edit.Logo" id="fondo" width="200" alt="">
-                                <img   v-else :src="`/image/hoja-rota1-854x1024.png`" id="fondo" width="200" alt="">
+                          <hr>  
+                          <article class="form-group row justify-content-center">
+                            <label for="inputFondo" class="col-sm-3 col-form-label tg-right">Imagen de fondo:</label>
+                              <input type="file" class="form-control col-sm-4 font-15px" id="inputFondo" placeholder="Imagen de la pagina">
+                              <div class="col-sm-4 td-center">
+                                <img   v-if="dataPag_edit.background !=''"  :src="dataPag_edit.background" id="background" width="150" alt="Imagen de la pagina">
+                                <img   v-else :src="`/image/hoja-rota1-854x1024.png`" id="background" width="150" alt="Imagen de la pagina">
+                              </div>
+                            <div class="col-sm-12"><hr></div>
+                            <label for="inputLogo" class="col-sm-3 col-form-label tg-right">Logo de pagina:</label>
+                              <input type="file" class="form-control col-sm-4 font-15px" id="inputLogo" placeholder="Logo de la pagina">
+                              <div class="col-sm-4 td-center">
+                                <img   v-if="dataPag_edit.Logo !=''"  :src="dataPag_edit.Logo" id="Logo" width="50" alt="Logo de la pagina">
+                                <img   v-else :src="`/image/hoja-rota1-854x1024.png`" id="Logo" width="50" alt="Logo de la pagina">
                               </div>
                           </article>
                       </form>
@@ -220,10 +242,11 @@
           id:"",
           Name:"",
           Roll:"",
+          Private_Public:"",
           Url:"",
           Url2:"",
           Estado:"",
-          Private_Public:"",
+          Color:"",
           background:"",
           Logo:"",
           Description:"",
@@ -234,15 +257,17 @@
       page:function(dataPag){
         // console.log(dataPag);
         var formData = new FormData();
-        //General
+
         formData.append('id',dataPag.id);
-        formData.append('Estado',dataPag.Estado);
+        //General
         formData.append('Name',dataPag.Name);
-        formData.append('Private_Public',dataPag.Private_Public);
         formData.append('Roll',dataPag.Roll);
+        formData.append('Estado',dataPag.Estado);
         formData.append('Url',dataPag.Url);
         formData.append('Url2',dataPag.Url2);
+        formData.append('Private_Public',dataPag.Private_Public);
         //Diseño
+        formData.append('Color',dataPag.Color);
         formData.append('Background',dataPag.background);
         formData.append('Logo',dataPag.Logo);
         //Descripción
@@ -257,6 +282,7 @@
                     if(response.data == '200'){
                         msg ="Actulización exitosa, codigo: [ "+response.data+" ]";
                         Alerts.windows('alert-success','success',msg);
+                        location.reload();
                     }else{
                         msg ="Proceso parcialmente Exitoso, Problemas en la consulta, codigo: [ "+response.data+" ]";
                         Alerts.windows('alert-warning','warning',msg);
@@ -272,6 +298,7 @@
                 .then(function () {
                     // always executed
                 });
+
       },
       modal:function(id,type){
           $(".modal").show();
@@ -288,14 +315,14 @@
               this.dataPag_edit.Estado='';
               this.dataPag_edit.Private_Public='';
               //Diseño
+              this.dataPag_edit.Color='';
               this.dataPag_edit.background='';
               this.dataPag_edit.Logo='';
               //Descripcion
               this.dataPag_edit.Description='';
           }else{
               $("#savePage").text("Guardar Cambios");
-          }
-          
+          }         
           
           for(var i in this.dataPaginas){
               if(this.dataPaginas[i].id==id){
@@ -307,6 +334,7 @@
                   this.dataPag_edit.Estado=this.dataPaginas[i].Estado;
                   this.dataPag_edit.Private_Public=this.dataPaginas[i].Private_Public;
                   //Diseño
+                  this.dataPag_edit.Color=this.dataPaginas[i].Color;
                   this.dataPag_edit.background=this.dataPaginas[i].background;
                   this.dataPag_edit.Logo=this.dataPaginas[i].Logo;
                   //Descripcion
@@ -376,7 +404,7 @@
         
         $("#title").html(titulo);
         $("#img").attr('src',fondo);
-         $("#logo").attr('src',logo);
+        $("#logo").attr('src',logo);
         $("#text").html(Desc);
         
         if(priv=="1"){
@@ -389,10 +417,13 @@
         $("#tecn").html(tec);
       }
     },
-     mounted() {
-         this.dataPaginas = this.data.paginas;
-         this.dataTecnologias = this.data.tecnologias;
-         this.dataPag_Tec = this.data.pagina_tecnologias;
+    changeStyle:async  function () {
+        alert();
+    },
+    mounted() {
+        this.dataPaginas = this.data.paginas;
+        this.dataTecnologias = this.data.tecnologias;
+        this.dataPag_Tec = this.data.pagina_tecnologias;
           
           for(var i in this.dataPag_Tec){
               for(var j in this.dataTecnologias){
@@ -412,8 +443,9 @@
           $("#logo").attr('src',"");
           $("#img").attr('src',"");
           $("#pro").attr('href',"");
-      });      
-     }
+      });   
+      
+    }
   }
 </script>
 <style lang="stylus">
@@ -464,5 +496,46 @@
   }
   .modal-dialog.modal-lg{
     margin-top: 50px;
+  }
+  //
+  .color_1{
+    background-color: #7db40a !important;
+    color:#fff !important;
+  }
+  .color_2{
+    background-color: #343a40 !important;
+    color:#fff !important;  
+  }
+  .color_3{
+    background-color: #67c7ed !important;
+    color:#3e3b3d !important;  
+  }
+  .color_4{
+    background-color: #312885 !important;
+    color:#fff !important;  
+  }
+  .color_5{
+    background-color: #014a7e !important;
+    color:#fff !important;  
+  }
+  .color_6{
+    background-color: #d50000 !important;
+    color:#fff !important;  
+  }
+  .color_7{
+    background-color: #008680 !important;
+    color:#fff !important;  
+  }
+  .color_8{
+    background-color: #00c853 !important;
+    color:#fff !important;  
+  }
+  .color_9{
+    background-color: #fc8c1e !important;
+    color:#071119 !important;  
+  }
+  .color_10{
+    background-color: #ec670a !important;
+    color:#fff !important;  
   }
 </style>
