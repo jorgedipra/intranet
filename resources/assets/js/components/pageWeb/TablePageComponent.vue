@@ -158,32 +158,64 @@
                           <article class="form-group row justify-content-center">
                             <div class="col-sm-3">
                               <span v-if="dataPag_edit.Color">
-                                <select name="Color" id="inputStyle" class="form-control font-15px" :on-change="changeStyle()">
-                                  <option value="1" v-if="dataPag_edit.Color=='1'" selected>Diseño 1</option>
-                                  <option value="1" v-else>Diseño 1</option>
-                                  <option value="2" v-if="dataPag_edit.Color=='2'" selected>Diseño 2</option>
-                                  <option value="2" v-else>Diseño 2</option>
-                                  <option value="3">Diseño 3</option>
+                                <select name="Color" id="inputStyle" class="form-control font-15px" 
+                                onchange="
+                                $('#ColorFont').attr('class','');
+                                $('#ColorFont').addClass('color_'+$('#inputStyle').val());
+                                ">
+                                  <option class="color_1" value="1" v-if="dataPag_edit.Color=='1'" selected>Diseño 1</option>
+                                  <option class="color_1" value="1" v-else>Diseño 1</option>
+                                  <option class="color_2" value="2" v-if="dataPag_edit.Color=='2'" selected>Diseño 2</option>
+                                  <option class="color_2" value="2" v-else>Diseño 2</option>
+                                  <option class="color_3" value="3" v-if="dataPag_edit.Color=='3'" selected>Diseño 3</option>
+                                  <option class="color_3" value="3" v-else>Diseño 3</option>
+                                  <option class="color_4" value="4" v-if="dataPag_edit.Color=='4'" selected>Diseño 4</option>
+                                  <option class="color_4" value="4" v-else>Diseño 4</option>
+                                  <option class="color_5" value="5" v-if="dataPag_edit.Color=='5'" selected>Diseño 5</option>
+                                  <option class="color_5" value="5" v-else>Diseño 5</option>
+                                  <option class="color_6" value="6" v-if="dataPag_edit.Color=='6'" selected>Diseño 6</option>
+                                  <option class="color_6" value="6" v-else>Diseño 6</option>
+                                  <option class="color_7" value="7" v-if="dataPag_edit.Color=='7'" selected>Diseño 7</option>
+                                  <option class="color_7" value="7" v-else>Diseño 7</option>
+                                  <option class="color_8" value="8" v-if="dataPag_edit.Color=='8'" selected>Diseño 8</option>
+                                  <option class="color_8" value="8" v-else>Diseño 8</option>
+                                  <option class="color_9" value="9" v-if="dataPag_edit.Color=='9'" selected>Diseño 9</option>
+                                  <option class="color_9" value="9" v-else>Diseño 9</option>
+                                  <option class="color_10" value="10" v-if="dataPag_edit.Color=='10'" selected>Diseño 10</option>
+                                  <option class="color_10" value="10" v-else>Diseño 10</option>
                                 </select>
                               </span>
                               <span v-else>
-                                  <select name="Color" id="inputStyle" class="form-control font-15px" v-on:change="changeStyle()" >
+                                  <select name="Color" id="inputStyle" class="form-control font-15px"  
+                                  onchange="
+                                  $('#ColorFont').attr('class','');
+                                  $('#ColorFont').addClass('color_'+$('#inputStyle').val());
+                                  ">
                                   <option selected>Seleciones Diseño</option>
-                                  <option value="1">Diseño 1</option>
-                                  <option value="2">Diseño 2</option>
-                                  <option value="3">Diseño 3</option>
+                                  <option class="color_1" value="1">Diseño 1</option>
+                                  <option class="color_2" value="2">Diseño 2</option>
+                                  <option class="color_3" value="3">Diseño 3</option>
+                                  <option class="color_4" value="4">Diseño 4</option>
+                                  <option class="color_5" value="5">Diseño 5</option>
+                                  <option class="color_6" value="6">Diseño 6</option>
+                                  <option class="color_7" value="7">Diseño 7</option>
+                                  <option class="color_8" value="8">Diseño 8</option>
+                                  <option class="color_9" value="9">Diseño 9</option>
+                                  <option class="color_10" value="10">Diseño 10</option>
                                 </select>
                               </span>
                             </div>
-                            <div class="col-sm-3 row">
-                              <label for="inputColor" class="col-sm-6 col-form-label tg-right">Fondo</label>
-                              <input type="color" class="form-control col-sm-6" id="inputColor" value="#000" disabled>
+                            <div class="col-sm-7 row">
+                              <label for="inputColor" class="col-sm-10 col-form-label tg-right">
+                                  <span id="ColorFont" class="">
+                                    <div class="img">
+                                      <img   v-if="dataPag_edit.Logo !=''"  :src="dataPag_edit.Logo" id="imgColor" width="30" height="30" alt="Imagen de la pagina">
+                                      <img   v-else :src="`/image/hoja-rota1-854x1024.png`" id="imgColor" width="30" height="30" alt="Imagen de la pagina">
+                                  </div> 
+                                    <span>Titulo</span>
+                                  </span>
+                              </label>
                             </div>
-                            <div class="col-sm-3 row">
-                              <label for="inputColor" class="col-sm-6 col-form-label tg-right">Color</label>
-                              <input type="color" class="form-control col-sm-6" id="inputColor" value="#000" >
-                            </div>
-                            <!-- <div class="col-sm-1"></div> -->
                           </article>
                           <hr>  
                           <article class="form-group row justify-content-center">
@@ -341,6 +373,10 @@
                   this.dataPag_edit.Description=this.dataPaginas[i].Description;
               }
           }
+           //stylo de diseño
+          $('#ColorFont').attr('class','');
+          $('#ColorFont').addClass('color_'+this.dataPag_edit.Color);
+          $("#ColorFont>span").text(this.dataPag_edit.Name?this.dataPag_edit.Name:'Titulo');
       },
       cerrar:function(){
           $(".modal").hide();
@@ -458,6 +494,41 @@
   position: fixed;
   bottom: 0;
   right: 0;
+}
+span#ColorFont{
+  border: solid 1px #ced4da;
+  border-radius: 3px;
+  display: block;
+  width: 100%;
+  height: 45px;
+  top: 0;
+  margin-top: -10px;
+  text-align: center;
+  font-size: 25px;
+  font-family: monospace;
+  clip-path: polygon(10% 0,100% 0,100% 0,100% 100%,100% 100%,0 100%,0 100%,0 30%);
+}
+#ColorFont>span{
+    left: 80px;
+    position: absolute;
+}
+#imgColor{
+  border: 2px solid #343a40;
+  border-radius: 100%;
+  height: 30px;
+  left: 0px;
+  top: 0;
+  position: absolute;
+  width: 30px;
+}
+.img {
+  border: 2px solid #fff;
+  border-radius: 100%;
+  height: 34px;
+  left: 35px;
+  top: 3px;
+  position: absolute;
+  width: 34px;
 }
 .border-dark{
   border:solid 1px;
