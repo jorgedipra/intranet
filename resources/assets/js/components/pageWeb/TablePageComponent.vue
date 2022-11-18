@@ -7,7 +7,7 @@
               <th scope="col">#</th>
               <th scope="col">Nombre</th>
               <th scope="col">Url Del Proyecto</th>
-              <th scope="col">Private/ Public</th>
+              <th scope="col">Tipo</th>
               <th scope="col" class="td-center">Actualización</th>
               <th scope="col" class="td-center">Estado</th>
               <th scope="col" class="td-center">Editar</th>
@@ -85,26 +85,10 @@
                           <div class="col-sm-3">
                             <input type="text" class="form-control tg-input font-15px" id="td-inputName" name="td-inputName" title="Nombre" placeholder="Nombre de la pagina" v-model="dataPag_edit.Name">
                           </div>
-                          <label for="td-inputRoll" class="col-sm-1 col-form-label tg-right">	Roll:</label>
+                              
+                          <label for="td-inputRoll" class="col-sm-1 col-form-label tg-right">	Roll: </label>
                           <div class="col-sm-3">
-                            <span v-if="dataPag_edit.Roll">
-                                <select class="custom-select form-control" id="td-inputRoll" name="td-inputRoll" title="Roll">
-                                  <option value="1" v-if="dataPag_edit.Roll=='Desarrollador'" selected>Desarrollador</option>
-                                  <option value="1" v-else>Desarrollador</option>
-                                  <option value="2" v-if="dataPag_edit.Roll=='Analista Master'" selected>Analista Master</option>
-                                  <option value="2" v-else>Analista Master</option>
-                                  <option value="3" v-if="dataPag_edit.Roll=='Consultor'" selected>Consultor</option>
-                                  <option value="3" v-else>Consultor</option>
-                                </select>
-                              </span>
-                              <span v-else>
-                                <select class="custom-select form-control" id="td-inputRoll" name="td-inputRoll" title="Roll">
-                                  <option selected>Roll...</option>
-                                  <option value="1">Desarrollador</option>
-                                  <option value="2">Analista Master</option>
-                                  <option value="3">Consultor</option>
-                                </select>
-                              </span>
+                            <input type="text" class="form-control tg-input font-15px" id="td-inputRoll" name="td-inputRoll" title="Nombre" placeholder="Nombre del Roll" v-model="dataPag_edit.Roll">
                           </div>
                           <div class="col-sm-3">
                             <div class="form-check">
@@ -162,7 +146,7 @@
                                 onchange="
                                 $('#ColorFont').attr('class','');
                                 $('#ColorFont').addClass('color_'+$('#inputStyle').val());
-                                ">
+                                " v-model="dataPag_edit.Color">
                                   <option class="color_1" value="1" v-if="dataPag_edit.Color=='1'" selected>Diseño 1</option>
                                   <option class="color_1" value="1" v-else>Diseño 1</option>
                                   <option class="color_2" value="2" v-if="dataPag_edit.Color=='2'" selected>Diseño 2</option>
@@ -190,8 +174,8 @@
                                   onchange="
                                   $('#ColorFont').attr('class','');
                                   $('#ColorFont').addClass('color_'+$('#inputStyle').val());
-                                  ">
-                                  <option selected>Seleciones Diseño</option>
+                                  " v-model="dataPag_edit.Color">
+                                  <option disabled value="" selected>Seleciones Diseño</option>
                                   <option class="color_1" value="1">Diseño 1</option>
                                   <option class="color_2" value="2">Diseño 2</option>
                                   <option class="color_3" value="3">Diseño 3</option>
@@ -220,7 +204,7 @@
                           <hr>  
                           <article class="form-group row justify-content-center">
                             <label for="inputFondo" class="col-sm-3 col-form-label tg-right">Imagen de fondo:</label>
-                              <input type="file" class="form-control col-sm-4 font-15px" id="inputFondo" placeholder="Imagen de la pagina">
+                              <input type="file" class="form-control col-sm-4 font-15px" @change="processFile1($event)"  name="fimagen" accept="image/gif, image/jpeg, image/png" id="inputFondo" placeholder="Imagen de la pagina"/>
                               <div class="col-sm-4 td-center">
                                 <img   v-if="dataPag_edit.background !=''"  :src="dataPag_edit.background" id="background" width="150" alt="Imagen de la pagina">
                                 <img   v-else :src="`/image/hoja-rota1-854x1024.png`" id="background" width="150" alt="Imagen de la pagina">
@@ -300,11 +284,13 @@
         formData.append('Private_Public',dataPag.Private_Public);
         //Diseño
         formData.append('Color',dataPag.Color);
-        formData.append('Background',dataPag.background);
+        if($("#inputFondo").val()!='')
+          formData.append('Background',dataPag.background);
+        else
+          formData.append('Background',null);
         formData.append('Logo',dataPag.Logo);
         //Descripción
         formData.append('Description',dataPag.Description);
-
 
             axios.post('/web/update_pageWeb', formData)
                 .then(function (response) {
@@ -316,7 +302,7 @@
                         Alerts.windows('alert-success','success',msg);
                         location.reload();
                     }else{
-                        msg ="Proceso parcialmente Exitoso, Problemas en la consulta, codigo: [ "+response.data+" ]";
+                        msg ="Proceso parcialmente Exitoso, Problemas en la consulta, codigo: <br>[ "+response.data+" ]";
                         Alerts.windows('alert-warning','warning',msg);
                     }
                 })
@@ -432,6 +418,31 @@
       tec: function(Url){
         window.open(Url, '_blank')
       },
+      processFile1(event) {
+                let file = event.target.files[0];
+                this.dataPag_edit.background = file;
+                this.cargaImagen(file,1);
+      },
+      processFile2(event) {
+                let file = event.target.files[0];
+                this.dataPag_edit.Logo = file;
+                this.cargaImagen(file,1);
+      },
+      cargaImagen(file,i){
+                let reader = new FileReader();
+                reader.onload = (e)=>{
+                    // console.log(e.target.result)
+                    switch (i) {
+                        case 1:
+                            this.dataPag_edit.background = e.target.result;
+                            break;
+                        case 2:
+                        this.dataPag_edit.Logo = e.target.result;
+                            break;
+                    }
+                }
+                reader.readAsDataURL(file);
+        },
       moreinfo: function (num,titulo,fondo,logo,Desc,page,home,priv) {       
         const id="#obj"+num;
         const tec = $(id+">.bordeCj>.lengPlc>.lengPlcaja").html();
@@ -452,9 +463,6 @@
         
         $("#tecn").html(tec);
       }
-    },
-    changeStyle:async  function () {
-        alert();
     },
     mounted() {
         this.dataPaginas = this.data.paginas;
@@ -494,6 +502,7 @@
   position: fixed;
   bottom: 0;
   right: 0;
+  z-index: 1050;
 }
 span#ColorFont{
   border: solid 1px #ced4da;

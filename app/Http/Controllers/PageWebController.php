@@ -95,7 +95,6 @@ class PageWebController extends Controller
     public function update_pageWeb(Request $request)
     {
         $paginaW = Pagina::find($request->id);
-
         //General
         $paginaW->Name = $request->Name;
         $paginaW->Estado = $request->Estado;
@@ -104,16 +103,24 @@ class PageWebController extends Controller
         $paginaW->Url = $request->Url;
         $paginaW->Home = $request->Url2;
         //Diseño
-        $paginaW->background = $request->Background;
+        $paginaW->Color = $request->Color;
+        if($request->Background !=null AND $request->Background !='null' AND $request->Background !=''){
+            $request->file('Background');
+            $path =Storage::disk('public')->put('image',$request->file('Background'));
+            $paginaW->background = $path;
+        }
+        $paginaW->Logo = $request->Logo;
         //Descripcion
         $paginaW->Description = utf8_encode($request->Description);        
 
         try {
-            $paginaW->save();
+            // $paginaW->save();
             $resul = "200";  
         } catch (\Exception $e) {
-            $resul = '204';
+            $resul = '204: '.$e;
         }
-        return $resul;
+
+        // return $resul;
+        // return $paginaW;
     }//END=>update_pageWeb
 }//::END class
