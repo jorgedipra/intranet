@@ -28,7 +28,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/web/update_presentation', 'webController@update_presentation')->name('webUpdatePresentation');
     Route::post('/web/update_frase', 'webController@update_frase')->name('webUpdateFrase');
     Route::post('/web/update_carrusel', 'webController@update_carrusel')->name('webUpdateCarrusel');
-    Route::post('/web/update_pageWeb', 'PageWebController@update_pageWeb')->name('webUpdatePageWeb');
     Route::get('/PageWeb', 'PageWebController@index')->name('PageWeb');
+    Route::post('/PageWeb/update_pageWeb', 'PageWebController@update_pageWeb')->name('webUpdatePageWeb');
 
 });

@@ -92,14 +92,14 @@
                           </div>
                           <div class="col-sm-3">
                             <div class="form-check">
-                              <input v-if="dataPag_edit.Private_Public=='1'" class="form-check-input col-sm-1 tg-edit" type="radio" name="gridRadios2" id="gridRadios3" value="option1" checked>
-                              <input  v-else class="form-check-input col-sm-1 tg-edit" type="radio" name="gridRadios2" id="gridRadios3" value="option1" >
+                              <input v-if="dataPag_edit.Private_Public=='1'" class="form-check-input col-sm-1 tg-edit" type="radio" name="gridRadios2" id="gridRadios3" value="1" :checked="dataPag_edit.Private_Public">
+                              <input  v-else class="form-check-input col-sm-1 tg-edit" type="radio" name="gridRadios2" id="gridRadios3" value="1"  v-model="dataPag_edit.Private_Public">
                               <label class="form-check-label col-sm-7 tg-edit" for="gridRadios3">
                                 privado
                               </label>
                               <div class="col-sm-3"></div><br>
-                              <input v-if="dataPag_edit.Private_Public=='0'" class="form-check-input col-sm-1 tg-success" type="radio" name="gridRadios2" id="gridRadios4" value="option2" checked>
-                              <input  v-else class="form-check-input col-sm-1 tg-success" type="radio" name="gridRadios2" id="gridRadios4" value="option2">
+                              <input v-if="dataPag_edit.Private_Public=='0'" class="form-check-input col-sm-1 tg-success" type="radio" name="gridRadios2" id="gridRadios4" value="0" :checked="dataPag_edit.Private_Public">
+                              <input  v-else class="form-check-input col-sm-1 tg-success" type="radio" name="gridRadios2" id="gridRadios4" value="0" v-model="dataPag_edit.Private_Public">
                               <label class="form-check-label col-sm-7 tg-success" for="gridRadios4">
                                 publico
                               </label>
@@ -119,14 +119,14 @@
                           </div>
                           <div class="col-sm-3">
                             <div class="form-check">
-                              <input  v-if="dataPag_edit.Estado=='1'" class="form-check-input col-sm-1 tg-success" type="radio" name="gridRadios" id="gridRadios1" value="option1" checked>
-                              <input  v-else class="form-check-input col-sm-1 tg-success" type="radio" name="gridRadios" id="gridRadios1" value="option1" >
+                              <input  v-if="dataPag_edit.Estado=='1'" class="form-check-input col-sm-1 tg-success" type="radio" name="gridRadios" id="gridRadios1" value="1"  :checked="dataPag_edit.Estado">
+                              <input  v-else class="form-check-input col-sm-1 tg-success" type="radio" name="gridRadios" id="gridRadios1" value="1" v-model="dataPag_edit.Estado">
                               <label class="form-check-label col-sm-7 tg-success" for="gridRadios1">
                                 Activo
                               </label>
                               <div class="col-sm-4"></div><br>
-                              <input v-if="dataPag_edit.Estado=='0'" class="form-check-input col-sm-1 tg-error" type="radio" name="gridRadios" id="gridRadios2" value="option2" checked>
-                              <input v-else class="form-check-input col-sm-1 tg-error" type="radio" name="gridRadios" id="gridRadios2" value="option2">
+                              <input v-if="dataPag_edit.Estado=='0'" class="form-check-input col-sm-1 tg-error" type="radio" name="gridRadios" id="gridRadios2" value="0"  :checked="dataPag_edit.Estado" >
+                              <input v-else class="form-check-input col-sm-1 tg-error" type="radio" name="gridRadios" id="gridRadios2" value="0" v-model="dataPag_edit.Estado">
                               <label class="form-check-label col-sm-7 tg-error" for="gridRadios2">
                                 Offline
                               </label>
@@ -211,7 +211,7 @@
                               </div>
                             <div class="col-sm-12"><hr></div>
                             <label for="inputLogo" class="col-sm-3 col-form-label tg-right">Logo de pagina:</label>
-                              <input type="file" class="form-control col-sm-4 font-15px" id="inputLogo" placeholder="Logo de la pagina">
+                              <input type="file" class="form-control col-sm-4 font-15px" @change="processFile2($event)"  id="inputLogo" placeholder="Logo de la pagina">
                               <div class="col-sm-4 td-center">
                                 <img   v-if="dataPag_edit.Logo !=''"  :src="dataPag_edit.Logo" id="Logo" width="50" alt="Logo de la pagina">
                                 <img   v-else :src="`/image/hoja-rota1-854x1024.png`" id="Logo" width="50" alt="Logo de la pagina">
@@ -224,7 +224,7 @@
                       <form>
                           <article class="form-group row justify-content-center">
                               <div class="col-sm-1"></div>
-                              <label class="form-check-input col-sm-10"  for="exampleFormControlTextarea1">Nota</label>
+                              <label class="form-check-input col-sm-10"  for="Description">Nota</label>
                               <textarea class="form-control col-sm-9" id="Description" name="Description" rows="10" v-model="dataPag_edit.Description"></textarea>
                           </article>
                       </form>
@@ -265,6 +265,7 @@
           Color:"",
           background:"",
           Logo:"",
+          ImgLogo:"",
           Description:"",
         }
       }
@@ -285,14 +286,19 @@
         //Diseño
         formData.append('Color',dataPag.Color);
         if($("#inputFondo").val()!='')
-          formData.append('Background',dataPag.background);
+            formData.append('Background',dataPag.background);
         else
-          formData.append('Background',null);
+            formData.append('Background',null);
+
+        if($("#inputLogo").val()!="")
+          formData.append('ImgLogo',true);
+            
+        
         formData.append('Logo',dataPag.Logo);
         //Descripción
         formData.append('Description',dataPag.Description);
 
-            axios.post('/web/update_pageWeb', formData)
+            axios.post('/PageWeb/update_pageWeb', formData)
                 .then(function (response) {
                     // handle success
                     // console.log(response);
@@ -426,7 +432,7 @@
       processFile2(event) {
                 let file = event.target.files[0];
                 this.dataPag_edit.Logo = file;
-                this.cargaImagen(file,1);
+                this.cargaImagen(file,2);
       },
       cargaImagen(file,i){
                 let reader = new FileReader();
